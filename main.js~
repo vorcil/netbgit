@@ -1,0 +1,28 @@
+
+    <!-- create the main workspace -->
+    var bodySelect = d3.select("body");
+    var svg = bodySelect.append("svg")
+    .attr("width", 1300)
+    .attr("height", 1300);
+
+    <!-- create the three subdivisions -->
+    var teamSelect = svg.append("rect")
+    .attr("width", 1000)
+    .attr("height", 200)
+    .attr("x", 75)
+    .attr("y", 0)
+    .attr("fill", "gray");
+
+    var graphWindow = svg.append("rect")
+    .attr("width", 1000)
+    .attr("height", 400)
+    .attr("x", 75)
+    .attr("y", 210)
+    .attr("fill", "steelblue");
+
+    var analysisWindow = svg.append("rect")
+    .attr("width", 1000)
+    .attr("height", 200)
+    .attr("x", 75)
+    .attr("y", 620)
+    .attr("fill", "lightsteelblue");
