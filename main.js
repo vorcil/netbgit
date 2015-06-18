@@ -6,12 +6,12 @@ d3.json("teams.json", function(data){
       width and height variables are used for calculating the dimensions of the app
       init allows me to figure out if a new banner is the same as the last banner
      */
-    var width = 1200, height=1000, initBanner=0, selectedTeam="null";
+    var width = 1400, height=1000, initBanner=0, selectedTeam="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
     var svg = bodySelect.append("svg")
-	.attr("width", 1300)
+	.attr("width", 1500)
 	.attr("height", 1000);
     
     
@@ -36,7 +36,7 @@ d3.json("teams.json", function(data){
     //official hexidecimal australian colours: #FCD116 and #008751
     //New Zealand colours: #191919 and #E6E6E6
     var AusWindow = svg.append("rect")
-	.attr("width", 600)
+	.attr("width", 700)
 	.attr("height", 100)
 	.attr("x", 75)
 	.attr("y", 0)
@@ -47,9 +47,9 @@ d3.json("teams.json", function(data){
 	.attr("stroke-width", 2);
 
     var NzWindow = svg.append("rect")
-	.attr("width", 600)
+	.attr("width", 700)
 	.attr("height", 100)
-	.attr("x", 675)
+	.attr("x", 775)
 	.attr("y", 0)
 	.attr("rx", 30)
 	.attr("ry", 30)
@@ -57,15 +57,8 @@ d3.json("teams.json", function(data){
 	.attr("stroke", "lightgray")
 	.attr("stroke-width", 2);
 
-    writeText(300,35,"AUSTRALIA", "#008751");
-    writeText(900, 35, "NEW ZEALAND", "#E6E6E6");
-
-
-
-
-
-
-
+    writeText(350,35,"AUSTRALIA", "#008751");
+    writeText(1050, 35, "NEW ZEALAND", "#E6E6E6");
 
     var banner = svg.append("svg")
 	.attr("x", 75)
@@ -87,6 +80,8 @@ d3.json("teams.json", function(data){
 	.attr("width", function(d) { return d.width})
 	.attr("xlink:href", function(d) { return d.image})
 	.attr("selected", function(d) { return d.selected})
+	.attr("stroke", "gray")
+	.attr("stroke-width", 2)
 	.on("click", function(d){
 	    clearSelected();
 	    d.selected="true"
@@ -104,15 +99,51 @@ d3.json("teams.json", function(data){
 		    .attr("width", 1200)
 		    .attr("xlink:href", d.banner);
 	    }
-
-	    
 	    selectedTeam=d.id;
-	    
 	});
+
+    var viewFinalsText = ["View Finals", "View preliminaries"];
+    var viewFinals = svg.selectAll("g")
+	.data(viewFinalsText).enter().append("g").attr("transform", function(d,i){return "translate(100,100";});
+
+    //START WORK FROM HERE NEXT
+    viewFinals.append("rect").attr("x",625).attr("y", 105).attr("rx",10)
+	.attr("ry", 10)
+	.attr("width", 300)
+	.attr("height", 50)
+	.attr("fill", "#5c7d5c")
+	.on("click", function(){
+	    d3.select(this.nextSibling)
+		.attr("opacity", "1")})
+	.on("click",function(){
+	    d3.select(this.nextSibling)
+		.attr("opacity", "0")});
     
+    viewFinals.append("text")
+	.attr("x", 700)
+	.attr("y", 130)
+	.attr("opacity", "1")
+	.text(function(d) {return d;});
+    
+  /*  
+    var viewFinals = svg.append("rect")
+	.attr("x", 625)
+	.attr("y", 105)
+	.attr("rx", 10)
+	.attr("ry", 10)
+	.attr("width", 300)
+	.attr("height", 50)
+	.attr("fill", "#5C7D5C")
+	.on("mouseover", function(){
+	    d3.select(this.nextSibling)
+		.attr("opacity", "1")
+		.attr("})
+    
+	.on("mouseout", function(){
+	    d3.select(this.nextSibling)
+		.attr("opacity","0")});
 
-
-
+*/
 
 
 

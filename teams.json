@@ -1,14 +1,14 @@
 [
-    {"id":0, "x_axis":90, "y_axis":50,"height":75, "width":75,"image":"bin/team0.jpg", "selected": "false","banner":"bin/banner0.png"},
-    {"id":1, "x_axis":180, "y_axis":50,"height":75, "width":75,"image":"bin/team1.jpg", "selected": "false", "banner":"bin/banner1.png"},
-    {"id":2, "x_axis":270, "y_axis":50,"height":75, "width":75,"image":"bin/team2.jpg", "selected": "false", "banner":"bin/banner2.png"},
-    {"id":3, "x_axis":360, "y_axis":50,"height":75, "width":75,"image":"bin/team3.jpg", "selected": "false","banner":"bin/banner3.png"},
-    {"id":4, "x_axis":450, "y_axis":50,"height":75, "width":75,"image":"bin/team4.jpg", "selected": "false","banner":"bin/banner4.png"},
-    {"id":5, "x_axis":830, "y_axis":50,"height":75, "width":75,"image":"bin/team5.jpg", "selected": "false","banner":"bin/banner5.png"},
-    {"id":6, "x_axis":920, "y_axis":50,"height":75, "width":75,"image":"bin/team6.jpg", "selected": "false","banner":"bin/banner6.png"},
-    {"id":7, "x_axis":1010, "y_axis":50,"height":75, "width":75,"image":"bin/team7.jpg", "selected": "false","banner":"bin/banner7.png"},
-    {"id":8, "x_axis":1100, "y_axis":50,"height":75, "width":75,"image":"bin/team8.jpg", "selected": "false","banner":"bin/banner8.png"},
-    {"id":9, "x_axis":1190, "y_axis":50,"height":75, "width":75,"image":"bin/team9.jpg", "selected": "false","banner":"bin/banner9.png"}
+    {"id":0, "x_axis":80, "y_axis":50,"height":100, "width":100,"image":"bin/team0.jpg", "selected": "false","banner":"bin/banner0.png"},
+    {"id":1, "x_axis":190, "y_axis":50,"height":100, "width":100,"image":"bin/team1.jpg", "selected": "false", "banner":"bin/banner1.png"},
+    {"id":2, "x_axis":300, "y_axis":50,"height":100, "width":100,"image":"bin/team2.jpg", "selected": "false", "banner":"bin/banner2.png"},
+    {"id":3, "x_axis":410, "y_axis":50,"height":100, "width":100,"image":"bin/team3.jpg", "selected": "false","banner":"bin/banner3.png"},
+    {"id":4, "x_axis":520, "y_axis":50,"height":100, "width":100,"image":"bin/team4.jpg", "selected": "false","banner":"bin/banner4.png"},
+    {"id":5, "x_axis":930, "y_axis":50,"height":100, "width":100,"image":"bin/team5.jpg", "selected": "false","banner":"bin/banner5.png"},
+    {"id":6, "x_axis":1040, "y_axis":50,"height":100, "width":100,"image":"bin/team6.jpg", "selected": "false","banner":"bin/banner6.png"},
+    {"id":7, "x_axis":1150, "y_axis":50,"height":100, "width":100,"image":"bin/team7.jpg", "selected": "false","banner":"bin/banner7.png"},
+    {"id":8, "x_axis":1260, "y_axis":50,"height":100, "width":100,"image":"bin/team8.jpg", "selected": "false","banner":"bin/banner8.png"},
+    {"id":9, "x_axis":1370, "y_axis":50,"height":100, "width":100,"image":"bin/team9.jpg", "selected": "false","banner":"bin/banner9.png"}
 
     
     
