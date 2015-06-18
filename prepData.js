@@ -8,6 +8,8 @@ The initial program ASSUMES that there are only 6 CSV files covering the years f
 
 Also EACH CSV file must have the naming convention of yyyy-Table1.csv Where year must be a year greater or equal to 2014 and include all previous years. For example adding the dataset for 2015, you must include both 2014 and 2015 csv files in the bin folder as 2015-Table1.csv and 2014-Table1.csv
 
+**WARNING**
+Furthermore a manual addition is required to the heading field of each CSV file to the value "venue" and must become "venue," that is to add a comma to the end
 Rajol Kochlashvili 2015
 */
 
@@ -18,9 +20,41 @@ for(i=0; i<numFiles; i++){
     files[i]=(2008+i+"-Table1.csv");
 }
 
-upload();
+var textFile=[];
+var arrayJson=[];
+store("bin/2009-Table1.csv");
 
-function upload(){
-    var fileUpload= document.getElementById("bin/2008-Table1.csv")
-    console.log(fileUpload);
+//can put an argument in store
+function store(text){
+
+    
+    var csvFile= new XMLHttpRequest();
+    csvFile.open("GET", text, false);
+    csvFile.onreadystatechange= function()
+    {
+	if(csvFile.readyState===4){
+	    if(csvFile.statue===200||csvFile.status==0){
+		textFile=csvFile.responseText;
+		
+	    }
+	}
+    }
+    csvFile.send(null);
+   // alert(textFile)
+    /*fix the first line problem
+      1: find position of venue
+      2: only include in the file everything after venue
+     */
+    var n = textFile.search("Venue");
+    textFile=textFile.slice(n+6,textFile.length+n+6);
+    console.log(textFile);
+    //convert the text to elements in an array
+    //arrayJson=textFile.split(',');
+    //forget the first 8 elements of the array
+    //arrayJson=arrayJson.splice(7,arrayJson.length+7);
+    //console.log(JSON.stringify(arrayJson));
 }
+   
+alert(textFile);
+//alert(arrayJson);
+
