@@ -1,10 +1,16 @@
+//load data from image.json file and store in an array
+ d3.json("teams.json", function(data){
+     var jsonImages=data;
+     
+     console.log("getting here");
 var width = 1200, height=1000;
 // create the main workspace
 var bodySelect = d3.select("body");
 var svg = bodySelect.append("svg")
     .attr("width", 1300)
-    .attr("height", 1300);
-
+    .attr("height", 1000);
+    
+     
 //create the three subdivisional workspaces
 var teamSelect = svg.append("rect")
     .attr("width", width)
@@ -55,6 +61,30 @@ var NzWindow = svg.append("rect")
 writeText(300,35,"AUSTRALIA", "#008751");
 writeText(900, 35, "NEW ZEALAND", "#E6E6E6");
 
+
+
+
+
+
+
+
+//Append the images to the application
+var images = svg.selectAll("image")
+    .data(jsonImages)
+    .enter()
+    .append("image");
+    
+    console.log("testing2");
+    var imageAttr = images
+	.attr("id", function(d) { return d.id})
+	.attr("x", function(d) { return d.x_axis})
+	.attr("y", function(d) { return d.y_axis})
+	.attr("height", function(d) { return d.height})
+	.attr("width", function(d) { return d.width})
+	.attr("xlink:href", function(d) { return d.image})
+	.attr("selected", function(d) { return d.selected});
+
+     console.log("testing3");
 var bannerWindow = svg.append("rect")
     .attr("width", width)
     .attr("height", 100)
@@ -65,6 +95,13 @@ var bannerWindow = svg.append("rect")
     .attr("fill", "lightgray")
     .attr("stroke", "gray")
     .attr("stroke-width", 2);
+
+
+
+
+
+
+
 
 /*A safe function to append text with x,y,text,color being:
 x     - the xcoordinate on the application
@@ -83,3 +120,4 @@ function writeText(x,y,text,color){
 	.attr("fill", color);
 }
 
+ });

@@ -1,0 +1,10 @@
+[
+    {"id":0, "x_axis":90, "y_axis":50,"height":75, "width":75,"image":"bin/team0.jpg", "selected": "false"},
+    {"id":1, "x_axis":180, "y_axis":50,"height":75, "width":75,"image":"bin/team1.jpg", "selected": "false"},
+    {"id":2, "x_axis":270, "y_axis":50,"height":75, "width":75,"image":"bin/team2.jpg", "selected": "false"},
+    {"id":3, "x_axis":360, "y_axis":50,"height":75, "width":75,"image":"bin/team3.jpg", "selected": "false"},
+    {"id":4, "x_axis":450, "y_axis":50,"height":75, "width":75,"image":"bin/team4.jpg", "selected": "false"}
+
+    
+    
+]
