@@ -4,9 +4,9 @@ d3.json("teams.json", function(data){
     
     /*global variables
       width and height variables are used for calculating the dimensions of the app
-      xselect is used to determine the xposition of the banner arrow of the selected team
+      init allows me to figure out if a new banner is the same as the last banner
      */
-    var width = 1200, height=1000, xselect;
+    var width = 1200, height=1000, initBanner=0, selectedTeam="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
@@ -60,12 +60,25 @@ d3.json("teams.json", function(data){
     writeText(300,35,"AUSTRALIA", "#008751");
     writeText(900, 35, "NEW ZEALAND", "#E6E6E6");
 
+
+
+
+
+
+
+
+    var banner = svg.append("svg")
+	.attr("x", 75)
+	.attr("y", 120)
+	.attr("height", 200)
+	.attr("width", 1200);
+    
     //Append the images to the application
     var images = svg.selectAll("image")
 	.data(jsonImages)
 	.enter()
 	.append("image");
-    
+  
     var imageAttr = images
 	.attr("id", function(d) { return d.id})
 	.attr("x", function(d) { return d.x_axis})
@@ -77,11 +90,34 @@ d3.json("teams.json", function(data){
 	.on("click", function(d){
 	    clearSelected();
 	    d.selected="true"
-	    xselect=d.x_axis;
-	    selectTransition();
+	    console.log("initBanner is: " + initBanner);
+	    if(initBanner<1){
+		var bannerWindow = banner.append("image")
+		    .attr("height", 200)
+		    .attr("width", 1200)
+		    .attr("xlink:href", d.banner);
+		initBanner=1;
+	    } else if(initBanner>0){
+		banner.selectAll("*").remove();
+		var BannerWindow = banner.append("image")
+		    .attr("height", 200)
+		    .attr("width", 1200)
+		    .attr("xlink:href", d.banner);
+	    }
+
+	    
+	    selectedTeam=d.id;
+	    
 	});
     
 
+
+
+
+
+
+
+    
     
     /*A safe function to append text with x,y,text,color being:
       x     - the xcoordinate on the application
@@ -107,34 +143,10 @@ d3.json("teams.json", function(data){
 	for(i=0; i<jsonImages.length; i++){
 	    if(jsonImages[i].selected==="true"){
 		jsonImages[i].selected="false";
-	    }
+	    }    
 	}
     }
 
-    /*A function to transition the selected banner to the next one
-
-     */
-    function selectTransition(){
-	var bannerWindow = svg.append("rect")
-	    .attr("width", width)
-	    .attr("height", 100)
-	    .attr("x", 75)
-	    .attr("y", 150)
-	    .attr("rx", 30)
-	    .attr("ry", 30)
-	    .attr("fill", "lightgray")
-	
-	var pointerPath = [ {"x":xselect,"y":160},
-			    {"x":xselect+50,"y":130},
-			    {"x":xselect+100,"y":160},
-			    {"x":xselect,"y":160}];
-	var lineFunction=d3.svg.line()
-	    .x(function(d) { return d.x; })
-	    .y(function(d) { return d.y; })
-	    .interpolate("linear");
-	
-	var pointer = svg.append("path")
-	    .attr("d", lineFunction(pointerPath))
-	    .attr("fill", "lightgray");
-    }
- });
+   
+});
+  
