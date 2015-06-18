@@ -6,31 +6,13 @@ d3.json("teams.json", function(data){
       width and height variables are used for calculating the dimensions of the app
       init allows me to figure out if a new banner is the same as the last banner
      */
-    var width = 1400, height=1000, initBanner=0, selectedTeam="null";
+    var width = 1400, height=1000, initBanner=0,finalClick=1, selectedTeam="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
     var svg = bodySelect.append("svg")
 	.attr("width", 1500)
 	.attr("height", 1000);
-    
-    
-    //create the three subdivisional workspaces
-  
-
-    var graphWindow = svg.append("rect")
-	.attr("width", width-50)
-	.attr("height", 400)
-	.attr("x", 100)
-	.attr("y", 210)
-	.attr("fill", "steelblue");
-
-    var analysisWindow = svg.append("rect")
-	.attr("width", width-100)
-	.attr("height", 200)
-	.attr("x", 125)
-	.attr("y", 620)
-	.attr("fill", "lightsteelblue");
 
     //create the two rounded rectangles for the Australia and New Zealand teams
     //official hexidecimal australian colours: #FCD116 and #008751
@@ -57,14 +39,14 @@ d3.json("teams.json", function(data){
 	.attr("stroke", "lightgray")
 	.attr("stroke-width", 2);
 
-    writeText(350,35,"AUSTRALIA", "#008751");
-    writeText(1050, 35, "NEW ZEALAND", "#E6E6E6");
+    writeText(350,35,"AUSTRALIA", "#008751","30px","visible");
+    writeText(1050, 35, "NEW ZEALAND", "#E6E6E6","30px","visible");
 
     var banner = svg.append("svg")
-	.attr("x", 75)
-	.attr("y", 120)
-	.attr("height", 200)
-	.attr("width", 1200);
+	.attr("x", 100)
+	.attr("y", 150)
+	.attr("height", 250)
+	.attr("width", 1400);
     
     //Append the images to the application
     var images = svg.selectAll("image")
@@ -89,61 +71,117 @@ d3.json("teams.json", function(data){
 	    if(initBanner<1){
 		var bannerWindow = banner.append("image")
 		    .attr("height", 200)
-		    .attr("width", 1200)
+		    .attr("width", 1350)
 		    .attr("xlink:href", d.banner);
 		initBanner=1;
 	    } else if(initBanner>0){
 		banner.selectAll("*").remove();
 		var BannerWindow = banner.append("image")
 		    .attr("height", 200)
-		    .attr("width", 1200)
+		    .attr("width", 1350)
 		    .attr("xlink:href", d.banner);
 	    }
 	    selectedTeam=d.id;
 	});
+    
+    var finals = svg.append("svg");
+    //initial draw
+    finalsButton();
 
-    var viewFinalsText = ["View Finals", "View preliminaries"];
-    var viewFinals = svg.selectAll("g")
-	.data(viewFinalsText).enter().append("g").attr("transform", function(d,i){return "translate(100,100";});
-
+    
     //START WORK FROM HERE NEXT
-    viewFinals.append("rect").attr("x",625).attr("y", 105).attr("rx",10)
-	.attr("ry", 10)
-	.attr("width", 300)
-	.attr("height", 50)
-	.attr("fill", "#5c7d5c")
-	.on("click", function(){
-	    d3.select(this.nextSibling)
-		.attr("opacity", "1")})
-	.on("click",function(){
-	    d3.select(this.nextSibling)
-		.attr("opacity", "0")});
+    function finalsButton(){
+	
+	//check initial state of button
+	if(finalClick==0){
+	    finalClick=1;
+	} else {
+	    finalClick=0;
+	}
+	
+	//clear finalButton
+	finals.selectAll("*").remove();
+
+	//draw viewFinal button and text
+	if(finalClick==0){
+	    var viewFinals = finals.append("rect")
+		.attr("x",625)
+		.attr("y", 105)
+		.attr("rx", 10)
+		.attr("ry", 10)
+		.attr("width", 300)
+		.attr("height", 50)
+		.attr("fill", "#BDC7C5")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	    var viewPrelimText= finals.append("text")
+		.attr("x", 705)
+		.attr("y", 135)
+		.text("VIEW FINALS")
+		.attr("font-size", "20px")
+		.attr("font-family", "cursive") 
+		.attr("fill", "black")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	}
+	
+	//draw viewPrelim button and text
+	if(finalClick==1){
+	    var viewPrelim = finals.append("rect")
+		.attr("x",625)
+		.attr("y", 105)
+		.attr("rx", 10)
+		.attr("ry", 10)
+		.attr("width", 300)
+		.attr("height", 50)
+		.attr("fill", "#BDC7C5")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	    var viewPrelimText= finals.append("text")
+		.attr("x", 705)
+		.attr("y", 135)
+		.text("PRELIMINARIES")
+		.attr("font-size", "20px")
+		.attr("font-family", "cursive") 
+		.attr("fill", "black")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	}
+	
+	    
+    }
+
+
+
+
+
+
+
+
     
-    viewFinals.append("text")
-	.attr("x", 700)
-	.attr("y", 130)
-	.attr("opacity", "1")
-	.text(function(d) {return d;});
     
-  /*  
-    var viewFinals = svg.append("rect")
-	.attr("x", 625)
-	.attr("y", 105)
+    //create the three subdivisional workspaces
+  
+    //inner window color #8EA09D outer #BDC7C5
+    var graphWindow = svg.append("rect")
+	.attr("width", width-100)
+	.attr("height", 400)
+	.attr("x", 125)
+	.attr("y", 350)
 	.attr("rx", 10)
 	.attr("ry", 10)
-	.attr("width", 300)
-	.attr("height", 50)
-	.attr("fill", "#5C7D5C")
-	.on("mouseover", function(){
-	    d3.select(this.nextSibling)
-		.attr("opacity", "1")
-		.attr("})
-    
-	.on("mouseout", function(){
-	    d3.select(this.nextSibling)
-		.attr("opacity","0")});
+	.attr("fill", "#BDC7C5");
 
-*/
+    var analysisWindow = svg.append("rect")
+	.attr("width", width-150)
+	.attr("height", 200)
+	.attr("x", 150)
+	.attr("y", 760)
+	.attr("fill", "#BDC7C5");
 
 
 
@@ -156,13 +194,14 @@ d3.json("teams.json", function(data){
       text  - the text to parse
       color - the colour name or hexidecimal color to parse
     */
-    function writeText(x,y,text,color){   
+	    function writeText(x,y,text,color,size,visibility){   
 	this["var"+text]= svg.append("text")
 	    .attr("x", x)
 	    .attr("y", y)
 	    .text(text)
-	    .attr("font-size", "30px")
+	    .attr("font-size", size)
 	    .attr("font-family", "cursive")
+	    .style("visibility", visibility)
 	//.style("font-weight", "bold")
 	    .attr("fill", color);
     }
