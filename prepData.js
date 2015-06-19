@@ -22,7 +22,7 @@ for(i=0; i<numFiles; i++){
 
 var textFile=[];
 var arrayJson=[];
-store("bin/2009-Table1.csv");
+store("bin/2008-Table1.csv");
 
 //can put an argument in store
 function store(text){
@@ -40,21 +40,42 @@ function store(text){
 	}
     }
     csvFile.send(null);
-   // alert(textFile)
+    //alert(textFile)
     /*fix the first line problem
       1: find position of venue
       2: only include in the file everything after venue
      */
     var n = textFile.search("Venue");
     textFile=textFile.slice(n+6,textFile.length+n+6);
-    console.log(textFile);
+    
+    //replace all new lines with commas (because the CSV file is not actually a real CSV file
+    textFile=textFile.replace(/\n/g, ",");
+   
     //convert the text to elements in an array
-    //arrayJson=textFile.split(',');
-    //forget the first 8 elements of the array
-    //arrayJson=arrayJson.splice(7,arrayJson.length+7);
-    //console.log(JSON.stringify(arrayJson));
+    arrayJson=textFile.split(',');
+    alert(arrayJson);
+    //systematically remove all byes
+    for(i=0; i<arrayJson.length; i++){
+	//if the string contains byes
+	if(arrayJson[i].indexOf("BYES") != -1){
+	    //remove previous string(that is the round number
+	    arrayJson.splice((i-1),1);
+	    //remove empty string containing byes
+	    arrayJson.splice((i-1),1);
+
+	}
+    }
+   
+    //this leaves several empty values which need to be removed also
+    arrayJson = arrayJson.filter(Boolean);
+    
+    alert(arrayJson);
+    console.log("first is: " + arrayJson[0]);
+   
+    //convert the array to a JSON file
+    
 }
    
-alert(textFile);
-//alert(arrayJson);
+//alert(textFile);
+//console.log(arrayJson);
 

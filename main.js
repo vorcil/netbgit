@@ -67,7 +67,7 @@ d3.json("teams.json", function(data){
 	.on("click", function(d){
 	    clearSelected();
 	    d.selected="true"
-	    console.log("initBanner is: " + initBanner);
+	    
 	    if(initBanner<1){
 		var bannerWindow = banner.append("image")
 		    .attr("height", 200)
