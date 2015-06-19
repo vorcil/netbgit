@@ -53,7 +53,7 @@ function store(text){
    
     //convert the text to elements in an array
     arrayJson=textFile.split(',');
-    alert(arrayJson);
+    
     //systematically remove all byes
     for(i=0; i<arrayJson.length; i++){
 	//if the string contains byes
@@ -68,11 +68,7 @@ function store(text){
    
     //this leaves several empty values which need to be removed also
     arrayJson = arrayJson.filter(Boolean);
-    
-    alert(arrayJson);
-    console.log("first is: " + arrayJson[0]);
-   
-    //convert the array to a JSON file
+
     
 }
    

@@ -165,22 +165,33 @@ d3.json("teams.json", function(data){
     
     
     //create the three subdivisional workspaces
-  
-    //inner window color #8EA09D outer #BDC7C5
+    //graph window
     var graphWindow = svg.append("rect")
 	.attr("width", width-100)
 	.attr("height", 400)
 	.attr("x", 125)
 	.attr("y", 350)
-	.attr("rx", 10)
-	.attr("ry", 10)
+	.attr("rx", 5)
+	.attr("ry", 5)
 	.attr("fill", "#BDC7C5");
 
+    var graph = svg.append("rect")
+	.attr("width", 1250)
+	.attr("height", 350)
+	.attr("x", 150)
+	.attr("y", 375)
+	.attr("rx", 5)
+	.attr("ry", 5)
+	.attr("fill", "#8ea09d");
+    
+    //inner window color #8EA09D outer #BDC7C5
     var analysisWindow = svg.append("rect")
 	.attr("width", width-150)
 	.attr("height", 200)
 	.attr("x", 150)
 	.attr("y", 760)
+	.attr("rx", 5)
+	.attr("ry", 5)
 	.attr("fill", "#BDC7C5");
 
 
