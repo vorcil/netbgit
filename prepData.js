@@ -21,9 +21,12 @@ for(i=0; i<numFiles; i++){
 }
 
 var textFile=[];
+var arrayFile=[];
 var arrayJson=[];
-store("bin/2008-Table1.csv");
+var myJson="";
 
+store("bin/2008-Table1.csv");
+jsonify();
 //can put an argument in store
 function store(text){
 
@@ -52,26 +55,44 @@ function store(text){
     textFile=textFile.replace(/\n/g, ",");
    
     //convert the text to elements in an array
-    arrayJson=textFile.split(',');
+    arrayFile=textFile.split(',');
     
     //systematically remove all byes
-    for(i=0; i<arrayJson.length; i++){
+    for(i=0; i<arrayFile.length; i++){
 	//if the string contains byes
-	if(arrayJson[i].indexOf("BYES") != -1){
+	if(arrayFile[i].indexOf("BYES") != -1){
 	    //remove previous string(that is the round number
-	    arrayJson.splice((i-1),1);
+	    arrayFile.splice((i-1),1);
 	    //remove empty string containing byes
-	    arrayJson.splice((i-1),1);
+	    arrayFile.splice((i-1),1);
 
 	}
     }
    
     //this leaves several empty values which need to be removed also
-    arrayJson = arrayJson.filter(Boolean);
+    arrayFile = arrayFile.filter(Boolean);
 
     
 }
    
 //alert(textFile);
 //console.log(arrayJson);
+//alert(arrayFile);
 
+function jsonify(){
+    for(i=0; i<arrayFile.length; i=i+7){
+	var toPush = {
+	    "round" : arrayFile[i],
+	    "date" : arrayFile[i+1],
+	    "time" : arrayFile[i+2],
+	    "team1" : arrayFile[i+3],
+	    "score" : arrayFile[i+4],
+	    "team2" : arrayFile[i+5],
+	    "location" : arrayFile[i+6]
+	};
+	arrayJson.push(toPush);
+    }
+    myJson = JSON.stringify({arrayJson: arrayJson});
+}
+
+console.log(myJson);

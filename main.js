@@ -83,77 +83,21 @@ d3.json("teams.json", function(data){
 	    }
 	    selectedTeam=d.id;
 	});
+
     
     var finals = svg.append("svg");
     //initial draw
     finalsButton();
 
-    
-    //START WORK FROM HERE NEXT
-    function finalsButton(){
-	
-	//check initial state of button
-	if(finalClick==0){
-	    finalClick=1;
-	} else {
-	    finalClick=0;
-	}
-	
-	//clear finalButton
-	finals.selectAll("*").remove();
 
-	//draw viewFinal button and text
-	if(finalClick==0){
-	    var viewFinals = finals.append("rect")
-		.attr("x",625)
-		.attr("y", 105)
-		.attr("rx", 10)
-		.attr("ry", 10)
-		.attr("width", 300)
-		.attr("height", 50)
-		.attr("fill", "#BDC7C5")
-	    	.on("click",function(){
-		    finalsButton();
-		});
-	    var viewPrelimText= finals.append("text")
-		.attr("x", 705)
-		.attr("y", 135)
-		.text("VIEW FINALS")
-		.attr("font-size", "20px")
-		.attr("font-family", "cursive") 
-		.attr("fill", "black")
-	    	.on("click",function(){
-		    finalsButton();
-		});
-	}
-	
-	//draw viewPrelim button and text
-	if(finalClick==1){
-	    var viewPrelim = finals.append("rect")
-		.attr("x",625)
-		.attr("y", 105)
-		.attr("rx", 10)
-		.attr("ry", 10)
-		.attr("width", 300)
-		.attr("height", 50)
-		.attr("fill", "#BDC7C5")
-	    	.on("click",function(){
-		    finalsButton();
-		});
-	    var viewPrelimText= finals.append("text")
-		.attr("x", 705)
-		.attr("y", 135)
-		.text("PRELIMINARIES")
-		.attr("font-size", "20px")
-		.attr("font-family", "cursive") 
-		.attr("fill", "black")
-	    	.on("click",function(){
-		    finalsButton();
-		});
-	}
-	
-	    
-    }
+
+
+
+
+
+    
+
+    
 
 
 
@@ -166,20 +110,20 @@ d3.json("teams.json", function(data){
     
     //create the three subdivisional workspaces
     //graph window
-    var graphWindow = svg.append("rect")
+    var graphWindow = svg.append("svg")
 	.attr("width", width-100)
 	.attr("height", 400)
-	.attr("x", 125)
+	.attr("x", 150)
 	.attr("y", 350)
 	.attr("rx", 5)
 	.attr("ry", 5)
 	.attr("fill", "#BDC7C5");
 
-    var graph = svg.append("rect")
+    var graph = graphWindow.append("rect")
 	.attr("width", 1250)
-	.attr("height", 350)
-	.attr("x", 150)
-	.attr("y", 375)
+	.attr("height", 400)
+	.attr("x", 0)
+	.attr("y", 0)
 	.attr("rx", 5)
 	.attr("ry", 5)
 	.attr("fill", "#8ea09d");
@@ -227,7 +171,68 @@ d3.json("teams.json", function(data){
 	    }    
 	}
     }
-
+    
+    //this function initializes the finals button and sets it's state
+    function finalsButton(){
+	//check initial state of button
+	if(finalClick==0){
+	    finalClick=1;
+	} else {
+	    finalClick=0;
+	}
+	
+	//clear finalButton
+	finals.selectAll("*").remove();
+	//draw viewFinal button and text
+	if(finalClick==0){
+	    var viewFinals = finals.append("rect")
+		.attr("x",625)
+		.attr("y", 105)
+		.attr("rx", 10)
+		.attr("ry", 10)
+		.attr("width", 300)
+		.attr("height", 50)
+		.attr("fill", "#BDC7C5")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	    var viewPrelimText= finals.append("text")
+		.attr("x", 705)
+		.attr("y", 135)
+		.text("VIEW FINALS")
+		.attr("font-size", "20px")
+		.attr("font-family", "cursive") 
+		.attr("fill", "black")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	}
+	//draw viewPrelim button and text
+	if(finalClick==1){
+	    var viewPrelim = finals.append("rect")
+		.attr("x",625)
+		.attr("y", 105)
+		.attr("rx", 10)
+		.attr("ry", 10)
+		.attr("width", 300)
+		.attr("height", 50)
+		.attr("fill", "#BDC7C5")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	    var viewPrelimText= finals.append("text")
+		.attr("x", 705)
+		.attr("y", 135)
+		.text("PRELIMINARIES")
+		.attr("font-size", "20px")
+		.attr("font-family", "cursive") 
+		.attr("fill", "black")
+	    	.on("click",function(){
+		    finalsButton();
+		});
+	}
+    }
+    //end of finals function
    
 });
   
