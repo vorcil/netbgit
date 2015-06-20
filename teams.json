@@ -1,6 +1,7 @@
 [
     {"id":"au-bg", "x_axis":75, "y_axis":0,"height":150, "width":700,"image":"bin/au-bg.png", "button":"false"},
     {"id":"nz-bg", "x_axis":775, "y_axis":0,"height":150, "width":700,"image":"bin/nz-bg.png", "button":"false"},
+    {"id":"graph-bg", "x_axis":150, "y_axis":365,"height":500, "width":1270,"image":"bin/graph-bg.png", "button":"false"},
     {"id":"Melbourne Vixens", "x_axis":80, "y_axis":75,"height":100, "width":100,"image":"bin/team0.png", "selected": "false","banner":"bin/banner0.png", "button":"true"},
     {"id":"New South Wales Swifts", "x_axis":190, "y_axis":75,"height":100, "width":100,"image":"bin/team1.png", "selected": "false", "banner":"bin/banner1.png","button":"true"},
     {"id":"Queensland Firebirds", "x_axis":300, "y_axis":75,"height":100, "width":100,"image":"bin/team2.png", "selected": "false", "banner":"bin/banner2.png","button":"true"},

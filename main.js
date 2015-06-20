@@ -18,7 +18,7 @@ d3.json("teams.json", function(data){
 
     var banner = svg.append("svg")
 	.attr("x", 100)
-	.attr("y", 150)
+	.attr("y", 165)
 	.attr("height", 250)
 	.attr("width", 1400);
     
@@ -60,7 +60,8 @@ d3.json("teams.json", function(data){
 		
 	    }//check if banner or not
 	    selectedTeam=d.id;
-	    console.log(selectedTeam);
+	    test();
+	    //drawGraph(prepScoreData(findTeamData(selectedTeam)));
 	});
 
     
@@ -75,38 +76,22 @@ d3.json("teams.json", function(data){
 
 
 
-    
-    
-    //create the three subdivisional workspaces
-    //graph window
-    var graphWindow = svg.append("svg")
-	.attr("width", width-100)
-	.attr("height", 400)
-	.attr("x", 150)
-	.attr("y", 350)
-	.attr("rx", 5)
-	.attr("ry", 5)
-	.attr("fill", "#BDC7C5");
+    function test(){
+	teemp=prepScoreData(findTeamData(selectedTeam));
+	
+	//create the three subdivisional workspaces
+	//graph window
+	svg.selectAll("rect")
+	    .data(teemp)
+	    .enter()
+	    .append("rect")
+	    .attr("x", function(d) { return d.round*100})
+	    .attr("y", 500)
+	    .attr("width", 90)
+	    .attr("height", function(d) { return d.score})
+	    .attr("fill", "red");
+    }
 
-    var graph = graphWindow.append("rect")
-	.attr("width", 1250)
-	.attr("height", 400)
-	.attr("x", 0)
-	.attr("y", 0)
-	.attr("rx", 5)
-	.attr("ry", 5)
-	.attr("fill", "#8ea09d");
-    
-    
-    //inner window color #8EA09D outer #BDC7C5
-    var analysisWindow = svg.append("rect")
-	.attr("width", width-150)
-	.attr("height", 200)
-	.attr("x", 150)
-	.attr("y", 760)
-	.attr("rx", 5)
-	.attr("ry", 5)
-	.attr("fill", "#BDC7C5");
 
 
 
