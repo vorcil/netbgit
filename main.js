@@ -6,41 +6,15 @@ d3.json("teams.json", function(data){
       width and height variables are used for calculating the dimensions of the app
       init allows me to figure out if a new banner is the same as the last banner
      */
-    var width = 1400, height=1000, initBanner=0,finalClick=1, selectedTeam="null";
+    var width = 1400, height=1000, initBanner=0;
+    finalClick=1;
+    selectedTeam="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
     var svg = bodySelect.append("svg")
 	.attr("width", 1500)
 	.attr("height", 1000);
-
-    //create the two rounded rectangles for the Australia and New Zealand teams
-    //official hexidecimal australian colours: #FCD116 and #008751
-    //New Zealand colours: #191919 and #E6E6E6
-    var AusWindow = svg.append("rect")
-	.attr("width", 700)
-	.attr("height", 100)
-	.attr("x", 75)
-	.attr("y", 0)
-	.attr("rx", 30)
-	.attr("ry", 30)
-	.attr("fill", "#FCD116") 
-	.attr("stroke", "lightgray")
-	.attr("stroke-width", 2);
-
-    var NzWindow = svg.append("rect")
-	.attr("width", 700)
-	.attr("height", 100)
-	.attr("x", 775)
-	.attr("y", 0)
-	.attr("rx", 30)
-	.attr("ry", 30)
-	.attr("fill", "#191919")
-	.attr("stroke", "lightgray")
-	.attr("stroke-width", 2);
-
-    writeText(350,35,"AUSTRALIA", "#008751","30px","visible");
-    writeText(1050, 35, "NEW ZEALAND", "#E6E6E6","30px","visible");
 
     var banner = svg.append("svg")
 	.attr("x", 100)
@@ -65,6 +39,8 @@ d3.json("teams.json", function(data){
 	.attr("stroke", "gray")
 	.attr("stroke-width", 2)
 	.on("click", function(d){
+	    //check if banner - stops the au-bg and nz-bg from being clickable
+	    if(d.button="true"){
 	    clearSelected();
 	    d.selected="true"
 	    
@@ -81,23 +57,16 @@ d3.json("teams.json", function(data){
 		    .attr("width", 1350)
 		    .attr("xlink:href", d.banner);
 	    }
+		
+	    }//check if banner or not
 	    selectedTeam=d.id;
+	    console.log(selectedTeam);
 	});
 
     
     var finals = svg.append("svg");
     //initial draw
     finalsButton();
-
-
-
-
-
-
-
-    
-
-    
 
 
 
@@ -128,6 +97,7 @@ d3.json("teams.json", function(data){
 	.attr("ry", 5)
 	.attr("fill", "#8ea09d");
     
+    
     //inner window color #8EA09D outer #BDC7C5
     var analysisWindow = svg.append("rect")
 	.attr("width", width-150)
@@ -143,23 +113,6 @@ d3.json("teams.json", function(data){
 
     
     
-    /*A safe function to append text with x,y,text,color being:
-      x     - the xcoordinate on the application
-      y     - the ycoordinate on the application
-      text  - the text to parse
-      color - the colour name or hexidecimal color to parse
-    */
-	    function writeText(x,y,text,color,size,visibility){   
-	this["var"+text]= svg.append("text")
-	    .attr("x", x)
-	    .attr("y", y)
-	    .text(text)
-	    .attr("font-size", size)
-	    .attr("font-family", "cursive")
-	    .style("visibility", visibility)
-	//.style("font-weight", "bold")
-	    .attr("fill", color);
-    }
 
     
     /*A function to clear all variables of the currently "selected" status and avoid bugs

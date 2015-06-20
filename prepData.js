@@ -105,7 +105,7 @@ extract three pieces of information per and push into the array
 want 
 */
 function splitArrays(){
-    array1=findTeamData("Queensland Firebirds");
+    array1=findTeamData("Melbourne Vixens");
     array2=findTeamData("New South Wales Swifts");
     array3=findTeamData("Queensland Firebirds");
     array4=findTeamData("West Coast Fever");
@@ -152,9 +152,6 @@ function findTeamData(teamName){
     return tempArray;
     
 }
-
-
-
     
 function jsonify(){
     for(i=0; i<arrayFile.length; i=i+7){
