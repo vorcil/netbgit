@@ -26,6 +26,8 @@ for(i=0; i<numFiles; i++){
 }
 
 var textFile=[];
+//setting the following arrays as global - each of the teams
+var array1, array2, array3, array4, array5, array6, array7, array8, array9, array10;
 var arrayFile=[];
 var arrayJson=[];
 var myJson="";
@@ -103,17 +105,17 @@ extract three pieces of information per and push into the array
 want 
 */
 function splitArrays(){
-    var array1=findTeamData("Central Pulse");
-    /*var array2=findTeamData("New South Wales Swifts");
-    var array3=findTeamData("Queensland Firebirds");
-    
-    var array5=[];
-    var array6=[];
-    var array7=[];
-    var array8=[];
-    var array9=[];
-    var array10=[];*/
-    console.log(array1);
+    array1=findTeamData("Queensland Firebirds");
+    array2=findTeamData("New South Wales Swifts");
+    array3=findTeamData("Queensland Firebirds");
+    array4=findTeamData("West Coast Fever");
+    array5=findTeamData("Adelaide Thunderbirds");
+    array6=findTeamData("Southern Steel");
+    array7=findTeamData("Central Pulse");
+    array8=findTeamData("Canterbury Tactix");
+    array9=findTeamData("Waikato Bay of Plenty Magic");
+    array10=findTeamData("Northern Mystics");
+ 
 }
 
 //create a json of a single team's games, all their games.
