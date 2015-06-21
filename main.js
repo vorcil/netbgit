@@ -94,6 +94,9 @@ d3.json("teams.json", function(data){
 	    .attr("height", 500)
 	    .attr("x", 180)
 	    .attr("y", 375);
+	var vis=d3.select("#chart").append("svg:svg")
+	    .attr("width", 100)
+	    .attr("height", 100);
 	
 	//var margin = {top: 20, right:20, bottom:70, left:40};
 
@@ -135,7 +138,6 @@ d3.json("teams.json", function(data){
 	    .style("text-anchor", "end")
 	    .text("Points");*/
 	
-
 	chart.selectAll("bar")
 	    .data(teemp)
 	    .enter().append("rect")
@@ -145,9 +147,16 @@ d3.json("teams.json", function(data){
 	    .attr("y", function(d) { return y(d.score);})
 	    .attr("height", function(d) { return 450 - y(d.score);})
 	    .on("mouseover", function(){
-		d3.select(this).style("fill", function(d) { console.log("color: " + d.round);
-							    return d.colour2;})
+		d3.select(this).style("fill", function(d) { return d.colour2;})
+		chart.append("svg:image")
+		    .attr("xlink:href", "bin/team0.png")
+		    .attr("x", 0)
+		    .attr("y", 0)
+		    .attr("width", 100)
+		    .attr("height", 100);
 	    })
+		
+    
 	    .on("mouseout", function(){
 		d3.select(this).style("fill", function(d) { return d.colour;
 							  })

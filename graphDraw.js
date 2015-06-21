@@ -63,7 +63,29 @@ function prepScoreData(d){
 
 
 
-
+//A function to return the location of a teamphoto by teamname
+function returnTeamPhoto(name){
+    if(name=="Melbourne Vixens"){
+	return "bin/team0.png" }
+    if(name=="West Coast Fever"){
+	return "bin/team1.png" }
+    if(name=="Adelaide Thunderbirds"){
+	return "bin/team2.png" }
+    if(name=="Queensland Firebirds"){
+	return "bin/team3.png" }
+    if(name=="New South Wales Swifts"){
+	return "bin/team4.png" }
+    if(name=="Southern Steel"){
+	return "bin/team5.png" }
+    if(name=="Central Pulse"){
+	return "bin/team6.png"}
+    if(name=="Canterbury Tactix"){
+	return "bin/team7.png"}
+    if(name=="Waikato Bay of Plenty Magic"){
+	return "bin/team8.png"}
+    if(name=="Northern Mystics"){
+	return "bin/team9.png"}
+}
 
 
 
