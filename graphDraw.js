@@ -6,17 +6,29 @@ function prepScoreData(d){
     for(i=0; i<d.length; i++){
 	if(d[i].team==selectedTeam){
 	    var toPush={
+		"date" : d[i].date,
+		"time" : d[i].time,
+		"team" : d[i].team,
+		"team2" : d[i].team2,
+		"location" : d[i].team2,
 		"round" : d[i].round,
 		"score" : d[i].score.substring(0,2),
-		"colour" : selectedColour
+		"colour" : selectedColour,
+		"colour2" : selectedColour2
 	    };
 	    data.push(toPush);
 	} else
 	    if(d[i].team2==selectedTeam){
 		var toPush={
+		    "date" : d[i].date,
+		    "time" : d[i].time,
+		    "team" : d[i].team,
+		    "team2" : d[i].team2,
+		    "location" : d[i].team2,
 		    "round" : d[i].round,
 		    "score" : d[i].score.substring(3,5),
-		    "colour" : selectedColour
+		    "colour" : selectedColour,
+		    "colour2" : selectedColour2
 		};
 		data.push(toPush);
 	    }
