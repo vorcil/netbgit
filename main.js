@@ -43,7 +43,7 @@ d3.json("teams.json", function(data){
 	.on("click", function(d){
 	    //check if banner - stops the au-bg and nz-bg from being clickable
 	    if(d.button="true"){
-
+		
 		
 		clearSelected();
 		d.selected="true"
@@ -111,7 +111,7 @@ d3.json("teams.json", function(data){
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");*/
 
 	x.domain(teemp.map(function(d) { return d.round; }));
-	y.domain([0, d3.max(teemp, function(d) { return d.score})]);
+	y.domain([0, 100]);
 
 	chart.append("g")
 	    .attr("class", "x axis")
@@ -123,7 +123,7 @@ d3.json("teams.json", function(data){
 	    .attr("dy", "-.55em")
 	    .attr("transform", "rotate(-90)");
 
-	chart.append("g")
+	/*chart.append("g")
 	    .attr("class", "y axis")
 	    .attr("transform", "translate(30, 0)")
 	    .call(yAxis)
@@ -132,7 +132,7 @@ d3.json("teams.json", function(data){
 	    .attr("y", 0)
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
-	    .text("Points");
+	    .text("Points");*/
 	
 
 	chart.selectAll("bar")
