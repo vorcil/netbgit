@@ -11,6 +11,7 @@ d3.json("teams.json", function(data){
     selectedTeam="null";
     graphInit="false";
     selectedColour="null";
+    selectedColour2="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
@@ -49,7 +50,6 @@ d3.json("teams.json", function(data){
 		d.selected="true"
 		//for global selected team colour
 		selectedColour=d.colour;
-		
 		if(initBanner<1){
 		    var bannerWindow = banner.append("image")
 			.attr("height", 200)
@@ -142,7 +142,13 @@ d3.json("teams.json", function(data){
 	    .attr("x", function(d) { return 20+x(d.round);})
 	    .attr("width", x.rangeBand())
 	    .attr("y", function(d) { return y(d.score);})
-	    .attr("height", function(d) { return 450 - y(d.score);});
+	    .attr("height", function(d) { return 450 - y(d.score);})
+	    .on("mouseover", function(){
+		d3.select(this).style("fill", "red")})
+	    .on("mouseout", function(){
+		d3.select(this).style("fill", function(d) { return d.colour;
+							  })
+	    });
 	
 
     }
