@@ -21,6 +21,16 @@ function prepScoreData(d){
 	    }
     }
     //fill in the missing rounds with 0 values (point 1 scores)
+    for(i=0; i<13; i++){
+	if(data[i].round != i+1){
+	    var temp={
+		"round" : i+1,
+		"score" : 1
+	    };
+	    data.splice(i, 0, temp);
+	}
+    
+    }
     
     return data;
 }
