@@ -104,20 +104,31 @@ parse through the entire json - or maybe the array?
 extract three pieces of information per and push into the array
 want 
 */
-function splitArrays(){
-    array1=findTeamData("Melbourne Vixens");
-    array2=findTeamData("New South Wales Swifts");
-    array3=findTeamData("Queensland Firebirds");
-    array4=findTeamData("West Coast Fever");
-    array5=findTeamData("Adelaide Thunderbirds");
-    array6=findTeamData("Southern Steel");
-    array7=findTeamData("Central Pulse");
-    array8=findTeamData("Canterbury Tactix");
-    array9=findTeamData("Waikato Bay of Plenty Magic");
-    array10=findTeamData("Northern Mystics");
+/*function returnTeamImage(team){
+    
+    if(team=="Melbourne Vixens"){
+	return "bin/team0.png";}
+    if(team=="West Coast Fever"){
+	return "bin/team1.png";}
+    if(team=="Adelaide Thunderbirds"){
+	return "bin/team2.png";}
+    if(team=="Queensland Firebirds"){
+	return "bin/team3.png";}
+    if(team=="New South Wales Swifts"){
+	return "bin/team4.png";}
+    if(team=="Southern Steel"){
+	return "bin/team5.png";}
+    if(team=="Central Pulse"){
+	return "bin/team6.png";}
+    if(team=="Canterbury Tactix"){
+	return "bin/team7.png";}
+    if(team=="Waikato Bay of Plenty Magic"){
+	return "bin/team8.png";}
+    if(team=="Northern Mystics"){
+	return "bin/team9.png";}
  
 }
-
+*/
 //create a json of a single team's games, all their games.
 function findTeamData(teamName){
     var tempArray=[];

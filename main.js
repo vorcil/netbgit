@@ -9,6 +9,7 @@ d3.json("teams.json", function(data){
     var width = 1400, height=1000, initBanner=0;
     finalClick=1;
     selectedTeam="null";
+    selectedTeam2="null";
     graphInit="false";
     selectedColour="null";
     selectedColour2="null";
@@ -71,7 +72,7 @@ d3.json("teams.json", function(data){
 	    }
 	    selectedTeam=d.id;
 	    test();
-	    //drawGraph(prepScoreData(findTeamData(selectedTeam)));
+	    
 	});
 
     
@@ -146,14 +147,28 @@ d3.json("teams.json", function(data){
 	    .attr("width", x.rangeBand())
 	    .attr("y", function(d) { return y(d.score);})
 	    .attr("height", function(d) { return 450 - y(d.score);})
-	    .on("mouseover", function(){
+	    .on("mouseover", function(d){
+		//console.log("team1: " + teemp.team + "  team2: " + teemp.team2);
 		d3.select(this).style("fill", function(d) { return d.colour2;})
+		
+		if(selectedTeam==d.team2){selectedTeam2=d.team;}
+		if(selectedTeam==d.team){selectedTeam2=d.team2;}
+		
+			
 		chart.append("svg:image")
-		    .attr("xlink:href", "bin/team0.png")
+		    .attr("xlink:href", function(d) { return returnTeamPhoto(selectedTeam)})
 		    .attr("x", 0)
 		    .attr("y", 0)
-		    .attr("width", 100)
-		    .attr("height", 100);
+		    .attr("width", 150)
+		    .attr("height", 150);
+		console.log("selectedTeam2: " + selectedTeam2);
+
+		chart.append("svg:image")
+		    .attr("xlink:href", function(d){ return returnTeamPhoto(selectedTeam2)})
+		    .attr("x", 1050)
+		    .attr("y", 0)
+		    .attr("width", 150)
+		    .attr("height", 150);
 	    })
 		
     
