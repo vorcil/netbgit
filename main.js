@@ -9,6 +9,8 @@ d3.json("teams.json", function(data){
     var width = 1400, height=1000, initBanner=0;
     finalClick=1;
     selectedTeam="null";
+    graphInit="false";
+    selectedColour="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
@@ -41,24 +43,31 @@ d3.json("teams.json", function(data){
 	.on("click", function(d){
 	    //check if banner - stops the au-bg and nz-bg from being clickable
 	    if(d.button="true"){
-	    clearSelected();
-	    d.selected="true"
-	    
-	    if(initBanner<1){
-		var bannerWindow = banner.append("image")
-		    .attr("height", 200)
-		    .attr("width", 1350)
-		    .attr("xlink:href", d.banner);
-		initBanner=1;
-	    } else if(initBanner>0){
-		banner.selectAll("*").remove();
-		var BannerWindow = banner.append("image")
-		    .attr("height", 200)
-		    .attr("width", 1350)
-		    .attr("xlink:href", d.banner);
-	    }
+
+		
+		clearSelected();
+		d.selected="true"
+		//for global selected team colour
+		selectedColour=d.colour;
+		
+		if(initBanner<1){
+		    var bannerWindow = banner.append("image")
+			.attr("height", 200)
+			.attr("width", 1350)
+			.attr("xlink:href", d.banner);
+		    initBanner=1;
+		} else if(initBanner>0){
+		    banner.selectAll("*").remove();
+		    var BannerWindow = banner.append("image")
+			.attr("height", 200)
+			.attr("width", 1350)
+			.attr("xlink:href", d.banner);
+		}
 		
 	    }//check if banner or not
+	    if(graphInit=="true"){
+		chart.selectAll('*').remove();
+	    }
 	    selectedTeam=d.id;
 	    test();
 	    //drawGraph(prepScoreData(findTeamData(selectedTeam)));
@@ -78,29 +87,35 @@ d3.json("teams.json", function(data){
 
     function test(){
 	teemp=prepScoreData(findTeamData(selectedTeam));
+	graphInit="true";
+	 chart = d3.select("svg").append("svg")
+	    .attr("width", 1200)
+	    .attr("height", 500)
+	    .attr("x", 180)
+	    .attr("y", 375);
+	
+	//var margin = {top: 20, right:20, bottom:70, left:40};
 
-	var margin = {top: 20, right:20, bottom:70, left:40};
+	var x = d3.scale.ordinal().rangeRoundBands([0, 1200], .1);
 
-	var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-	var y = d3.scale.linear().range([height, 0]);
+	var y = d3.scale.linear().range([450, 0]);
 
 	var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
 	var yAxis = d3.svg.axis().scale(y).orient("left");
 
-	var chart = d3.select("body").append("svg")
+	/*var chart = d3.select("body").append("svg")
 	    .attr("width", width+margin.left + margin.right)
 	    .attr("height", height+margin.top + margin.bottom)
 	    .append("g")
-	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");*/
 
 	x.domain(teemp.map(function(d) { return d.round; }));
 	y.domain([0, d3.max(teemp, function(d) { return d.score})]);
 
 	chart.append("g")
 	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + height + ")")
+	    .attr("transform", "translate(0," + 449 + ")")
 	    .call(xAxis)
 	    .selectAll("text")
 	    .style("text-anchor", "end")
@@ -110,22 +125,24 @@ d3.json("teams.json", function(data){
 
 	chart.append("g")
 	    .attr("class", "y axis")
+	    .attr("transform", "translate(30, 0)")
 	    .call(yAxis)
 	    .append("text")
 	    .attr("transform", "rotate(-90)")
-	    .attr("y", 6)
+	    .attr("y", 0)
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
-	    .text("Value ($) ");
+	    .text("Points");
+	
 
 	chart.selectAll("bar")
 	    .data(teemp)
 	    .enter().append("rect")
-	    .style("fill", "steelblue")
-	    .attr("x", function(d) { return x(d.round);})
+	    .style("fill", function(d) { return d.colour; })
+	    .attr("x", function(d) { return 20+x(d.round);})
 	    .attr("width", x.rangeBand())
 	    .attr("y", function(d) { return y(d.score);})
-	    .attr("height", function(d) { return height - y(d.score);});
+	    .attr("height", function(d) { return 450 - y(d.score);});
 	
 
     }

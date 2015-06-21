@@ -33,7 +33,7 @@ var arrayJson=[];
 var myJson="";
 
 store("bin/2008-Table1.csv");
-splitArrays();
+//splitArrays();
 
 
 

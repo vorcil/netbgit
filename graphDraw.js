@@ -8,14 +8,17 @@ function prepScoreData(d){
 	if(d[i].team==selectedTeam){
 	    var toPush={
 		"round" : d[i].round,
-		"score" : d[i].score.substring(0,2)
+		"score" : d[i].score.substring(0,2),
+		"colour" : selectedColour
 	    };
+	    
 	    data.push(toPush);
 	} else
 	    if(d[i].team2==selectedTeam){
 		var toPush={
 		    "round" : d[i].round,
-		    "score" : d[i].score.substring(3,5)
+		    "score" : d[i].score.substring(3,5),
+		    "colour" : selectedColour
 		};
 		data.push(toPush);
 	    }
@@ -35,14 +38,6 @@ function prepScoreData(d){
     return data;
 }
 
-function drawGraph(data){
-
-    bar.append("rect")
-	.attr("y", function(d) { return d.score })
-	.attr("height", function(d) { return height - y(d.value); })
-	.attr("width", barWidth -1);
-
-}
 
 
 		
