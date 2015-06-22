@@ -217,13 +217,37 @@ d3.json("teams.json", function(data){
 	    });
 	//an array of [selected team seasona average, rival teams season average] 
 	//bottom part of the graph
-	extraStats=d3.select("svg").append("svg")
+	var colour=d3.scale.category20();
+	Stats=d3.select("svg").append("svg")
 	    .attr("width", 1270)
 	    .attr("height", 200)
 	    .attr("x", 180)
 	    .attr("y", 875);
-    
-//	pie = d3.layout.pie().value(function(d){return d.
+
+	var vis = d3.select(Stats).append("svg:svg")
+	    .data(averages)
+	    .attr("width", 250)
+	    .attr("height", 250)
+	    
+	var arc = d3.svg.arc().outerRadius(50);
+
+	var pie = d3.layout.pie()
+	    .value(function(d) { return d.average})
+	    .sort(function(d) { return null; } );
+
+	var arcs=vis.selectAll("g.slice")
+	    .data(pie)
+	    .enter()
+	    .append("svg:g")
+	    .attr("class", "slice");
+
+	arcs.append("svg:path")
+	    .attr("fill", function(d,i){return colour(i);})
+	    .attr("d", arc);
+
+	
+		   
+	//pie = d3.layout.pie().value(function(d){return d.
     }
 
 

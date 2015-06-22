@@ -66,16 +66,20 @@ function prepScoreData(d){
 //calculate the averages across the selected team's scores
 function calcAverages(d){
      temp1=0, temp2=0;
-    
+    var dataReturn=[];
     for(i=0; i<d.length; i++){
-	if(d[i].score != "dr" && d[i].score2 !="w" && d[i].score != "undefined" && d[i].score2 != "undefined"){
+	if(d[i].score != "w " && d[i].score2 !="dr" && d[i].score != "dr" && d[i].score2 !="w" && d[i].score != "undefined" && d[i].score2 != "undefined"){
 	    temp1=temp1+parseInt(d[i].score);
 	    temp2=temp2+parseInt(d[i].score2);
 	}
     }
-    averages=[temp1/(d.length-(numByes/5)),temp2/(d.length-(numByes/5))]
-    console.log("averages: " + averages)
-    return averages;
+    averages =[temp1/(d.length-(numByes/5)),temp2/(d.length-(numByes/5))]
+    for(i=0; i<2; i++){ temp = { "average" : averages[i] };  dataReturn.push(temp)};
+   
+    console.log(dataReturn);
+    //var dataReturn = { "average1" : averages[0], "average2" : averages[1]};
+    //console.log(dataReturn);
+    return dataReturn;
 }
 
 
