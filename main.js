@@ -10,15 +10,21 @@ d3.json("teams.json", function(data){
     finalClick=1;
     selectedTeam="null";
     selectedTeam2="null";
+    chartTeam="null";
+    chartTeam2="null";
     graphInit="false";
     selectedColour="null";
     selectedColour2="null";
+    fullscore="null";
+    selectedLocation="null";
+    selectedDate="null";
+    averages="null";
     
     // create the main workspace
     var bodySelect = d3.select("body");
     var svg = bodySelect.append("svg")
 	.attr("width", 1500)
-	.attr("height", 1000);
+	.attr("height", 1500);
 
     var banner = svg.append("svg")
 	.attr("x", 100)
@@ -78,7 +84,7 @@ d3.json("teams.json", function(data){
     
     var finals = svg.append("svg");
     //initial draw
-    finalsButton();
+    //finalsButton();
 
 
 
@@ -89,6 +95,7 @@ d3.json("teams.json", function(data){
 
     function test(){
 	teemp=prepScoreData(findTeamData(selectedTeam));
+	averages=calcAverages(teemp);
 	graphInit="true";
 	 chart = d3.select("svg").append("svg")
 	    .attr("width", 1200)
@@ -153,31 +160,70 @@ d3.json("teams.json", function(data){
 		
 		if(selectedTeam==d.team2){selectedTeam2=d.team;}
 		if(selectedTeam==d.team){selectedTeam2=d.team2;}
+		chartTeam=d.team;
+		chartTeam2=d.team2;
+		fullscore=d.fullscore;
+		selectedDate=d.date;
+		selectedLocation=d.location;
 		
 			
 		chart.append("svg:image")
-		    .attr("xlink:href", function(d) { return returnTeamPhoto(selectedTeam)})
+		    .attr("xlink:href", function(d) { return returnTeamPhoto(chartTeam)})
 		    .attr("x", 0)
 		    .attr("y", 0)
 		    .attr("width", 150)
 		    .attr("height", 150);
-		console.log("selectedTeam2: " + selectedTeam2);
-
+		
 		chart.append("svg:image")
-		    .attr("xlink:href", function(d){ return returnTeamPhoto(selectedTeam2)})
+		    .attr("xlink:href", function(d){ return returnTeamPhoto(chartTeam2)})
 		    .attr("x", 1050)
 		    .attr("y", 0)
 		    .attr("width", 150)
 		    .attr("height", 150);
-	    })
-		
-    
-	    .on("mouseout", function(){
-		d3.select(this).style("fill", function(d) { return d.colour;
-							  })
-	    });
-	
 
+		chart.append("svg:image")
+		    .attr("x", 430)
+		    .attr("y", 0)
+		    .attr("xlink:href", "bin/pointbanner.png")
+		    .attr("width", 450)
+		    .attr("height", 150);
+		    
+		
+		chart.append("text")
+		    .attr("x", 560)
+		    .attr("y", 50)
+		    .text(fullscore)
+		    .attr("font-size", 40)
+		    .attr("fill", function(d) { return selectedColour});
+
+		chart.append("text")
+		    .attr("x", 540)
+		    .attr("y", 90)
+		    .text(selectedDate)
+		    .attr("font-size", 20)
+		    .attr("fill", function(d) { return selectedColour});
+		
+		chart.append("text")
+		    .attr("x", 500)
+		    .attr("y", 130)
+		    .text(selectedLocation)
+		    .attr("font-size", 15)
+		    .attr("fill", function(d) { return selectedColour});		
+	    })
+	    .on("mouseout", function(){
+		d3.select(this).style("fill", function(d) { return d.colour; })
+		chart.selectAll("image").remove();
+		chart.selectAll("text").remove();	
+	    });
+	//an array of [selected team seasona average, rival teams season average] 
+	//bottom part of the graph
+	extraStats=d3.select("svg").append("svg")
+	    .attr("width", 1270)
+	    .attr("height", 200)
+	    .attr("x", 180)
+	    .attr("y", 875);
+    
+//	pie = d3.layout.pie().value(function(d){return d.
     }
 
 

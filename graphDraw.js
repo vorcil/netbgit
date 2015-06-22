@@ -5,16 +5,19 @@ function prepScoreData(d){
     var data=[];
     for(i=0; i<d.length; i++){
 	if(d[i].team==selectedTeam){
+	    
 	    var toPush={
 		"date" : d[i].date,
 		"time" : d[i].time,
 		"team" : d[i].team,
 		"team2" : d[i].team2,
-		"location" : d[i].team2,
+		"location" : d[i].location,
 		"round" : d[i].round,
 		"score" : d[i].score.substring(0,2),
+		"score2" : d[i].score.substring(3,5),
 		"colour" : selectedColour,
-		"colour2" : selectedColour2
+		"colour2" : selectedColour2,
+		"fullscore" : d[i].score
 	    };
 	    data.push(toPush);
 	} else
@@ -24,22 +27,26 @@ function prepScoreData(d){
 		    "time" : d[i].time,
 		    "team" : d[i].team,
 		    "team2" : d[i].team2,
-		    "location" : d[i].team2,
+		    "location" : d[i].location,
 		    "round" : d[i].round,
 		    "score" : d[i].score.substring(3,5),
+		    "score2" : d[i].score.substring(0,2),
 		    "colour" : selectedColour,
-		    "colour2" : selectedColour2
+		    "colour2" : selectedColour2,
+		    "fullscore" : d[i].score
+		    
 		};
 		data.push(toPush);
 	    }
     }
     //fill in the missing rounds with 0 values (point 1 scores)
     for(i=0; i<13; i++){
-	console.log(data[i].score)
+	
 	if(data[i].round != i+1){
 	    var temp={
 		"round" : "BYE",
-		"score" : 1
+		"score" : 1,
+		"score2" : 1
 	    };
 	    
 	    data.splice(i, 0, temp);
@@ -56,7 +63,20 @@ function prepScoreData(d){
     return data;
 }
 
-
+//calculate the averages across the selected team's scores
+function calcAverages(d){
+     temp1=0, temp2=0;
+    
+    for(i=0; i<d.length; i++){
+	if(d[i].score != "dr" && d[i].score2 !="w" && d[i].score != "undefined" && d[i].score2 != "undefined"){
+	    temp1=temp1+parseInt(d[i].score);
+	    temp2=temp2+parseInt(d[i].score2);
+	}
+    }
+    averages=[temp1/(d.length-(numByes/5)),temp2/(d.length-(numByes/5))]
+    console.log("averages: " + averages)
+    return averages;
+}
 
 
 

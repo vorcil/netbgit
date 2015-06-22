@@ -42,7 +42,7 @@ store("bin/2008-Table1.csv");
 
 //can put an argument in store
 function store(text){
-
+   numByes=0;
     
     var csvFile= new XMLHttpRequest();
     csvFile.open("GET", text, false);
@@ -75,6 +75,7 @@ function store(text){
 	//if the string contains byes
 	if(arrayFile[i].indexOf("BYES") != -1){
 	    //remove previous string(that is the round number
+	    numByes++;
 	    arrayFile.splice((i-1),1);
 	    //remove empty string containing byes
 	    arrayFile.splice((i-1),1);
