@@ -31,13 +31,32 @@ d3.json("teams.json", function(data){
 	.attr("y", 165)
 	.attr("height", 250)
 	.attr("width", 1400);
+     var ausbg = svg.append("image")
+	.attr("xlink:href", "bin/au-bg.png")
+	.attr("x", 75)
+	.attr("y", 0)
+	.attr("height", 150)
+	.attr("width", 700)
+    var nzbg = svg.append("image")
+	.attr("xlink:href", "bin/nz-bg.png")
+	.attr("x", 775)
+	.attr("y", 0)
+	.attr("height", 150)
+	.attr("width", 700);
+    var graphbg = svg.append("image")
+	.attr("xlink:href", "bin/graph-bg.png")
+	.attr("x", 140)
+	.attr("y", 365)
+	.attr("height", 500)
+	.attr("width", 1270);
     
     //Append the images to the application
     var images = svg.selectAll("image")
 	.data(jsonImages)
 	.enter()
 	.append("image");
-  
+   
+    
     var imageAttr = images
 	.attr("id", function(d) { return d.id})
 	.attr("x", function(d) { return d.x_axis})
@@ -50,11 +69,11 @@ d3.json("teams.json", function(data){
 	.attr("stroke-width", 2)
 	.on("click", function(d){
 	    //check if banner - stops the au-bg and nz-bg from being clickable
-	    d3.selectAll("*").style("opacity", 1);
-	    d3.select(this).transition().style("opacity", .7);
-	    
+
 	    if(d.button="true"){
-		
+		d3.selectAll("*").style("opacity", 1);
+		d3.select(this).transition().style("opacity", .7);
+	    
 		
 		clearSelected();
 		d.selected="true"
@@ -76,14 +95,14 @@ d3.json("teams.json", function(data){
 			.attr("xlink:href", d.banner);
 		}
 		
-	    }//check if banner or not
+	    //check if banner or not
 	    if(graphInit=="true"){
 		chart.selectAll("*").remove();
 	    }
 	    selectedTeam=d.id;
 	    test();
 	    drawPieAverages();
-	    
+	    }
 	});
 	
 
@@ -244,20 +263,23 @@ d3.json("teams.json", function(data){
 	    .attr("transform", "translate(100,100)");
 
 	var arc = d3.svg.arc().outerRadius(80).innerRadius(0);
-	var pie = d3.layout.pie().value(function(d){ console.log("get here"); return d.average;});
-	
+	var pie = d3.layout.pie().value(function(d){ return d.average;});
+
 	var g = vis.selectAll(".arc")
 	    .data(pie(averages))
 	    .enter()
 	    .append("g")
 	    .attr("class", "arc");
 
+   
+
 	g.append("path")
 	    .attr("fill", function(d,i) { return colour[i];})
 	    .attr("d", arc)
 	    .attr("x", 100)
 	    .attr("y", 100);
-
+	    
+	
 
 	vis.append("rect")
 	    .attr("x", 125)
@@ -266,6 +288,17 @@ d3.json("teams.json", function(data){
 	    .attr("ry", 10)
 	    .attr("width", 50)
 	    .attr("height", 50)
+	    .attr("fill", "white")
+	    .attr("stroke", "gray")
+	    .attr("stroke-width", 2);
+	
+	vis.append("rect")
+	    .attr("x", -100)
+	    .attr("y", -100)
+	    .attr("rx", 10)
+	    .attr("ry", 10)
+	    .attr("width", 300)
+	    .attr("height", 25)
 	    .attr("fill", "white")
 	    .attr("stroke", "gray")
 	    .attr("stroke-width", 2);
@@ -283,6 +316,12 @@ d3.json("teams.json", function(data){
 	    .style("fill", selectedColour)
 	    .text(averages[0].average.toPrecision([2]));
 
+	vis.append("text")
+	    .attr("x", -80)
+	    .attr("y", -80)
+	    .style("fill", selectedColour)
+	    .text("AVERAGE POINTS PER GAME");
+	
 	//vis.append("rect")
 	  //  .attr("
 
@@ -320,7 +359,7 @@ d3.json("teams.json", function(data){
     }
     
     //this function initializes the finals button and sets it's state
-    function finalsButton(){
+    /*function finalsButton(){
 	//check initial state of button
 	if(finalClick==0){
 	    finalClick=1;
@@ -380,6 +419,6 @@ d3.json("teams.json", function(data){
 	}
     }
     //end of finals function
-   
+   */
 });
   

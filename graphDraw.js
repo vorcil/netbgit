@@ -65,7 +65,14 @@ function prepScoreData(d){
 
 //calculate the averages across the selected team's scores
 function calcAverages(d){
-     temp1=0, temp2=0;
+    temp1=0, temp2=0;
+    //deal with the draw problem across multiple files
+    var divis =0;
+    if(fileName!="bin/2011-Table1.csv"){ var divis=1
+					 if (fileName=="bin/2008-Table1.csv" && (selectedTeam=="West Coast Fever" || selectedTeam=="Central Pulse")){
+					     divis=2;
+					 }
+				       };
     var dataReturn=[];
     for(i=0; i<d.length; i++){
 	if(d[i].score != "w " && d[i].score2 !="dr" && d[i].score != "dr" && d[i].score2 !="w" && d[i].score != "undefined" && d[i].score2 != "undefined"){
@@ -73,7 +80,7 @@ function calcAverages(d){
 	    temp2=temp2+parseInt(d[i].score2);
 	}
     }
-    averages =[temp1/(d.length-(numByes/5)),temp2/(d.length-(numByes/5))]
+    averages =[temp1/(d.length-divis),temp2/(d.length-divis)]
     for(i=0; i<2; i++){ temp = { "average" : averages[i] };  dataReturn.push(temp)};
    
     
