@@ -50,6 +50,9 @@ d3.json("teams.json", function(data){
 	.attr("stroke-width", 2)
 	.on("click", function(d){
 	    //check if banner - stops the au-bg and nz-bg from being clickable
+	    d3.selectAll("*").style("opacity", 1);
+	    d3.select(this).transition().style("opacity", .7);
+	    
 	    if(d.button="true"){
 		
 		
@@ -82,6 +85,7 @@ d3.json("teams.json", function(data){
 	    drawPieAverages();
 	    
 	});
+	
 
     
     var finals = svg.append("svg");
@@ -160,7 +164,8 @@ d3.json("teams.json", function(data){
 	    .attr("height", function(d) { return 450 - y(d.score);})
 	    .on("mouseover", function(d){
 		//console.log("team1: " + teemp.team + "  team2: " + teemp.team2);
-		d3.select(this).style("fill", function(d) { return d.colour2;})
+		d3.select(this)
+		    .style("fill", function(d) { return d.colour2;})
 		
 		if(selectedTeam==d.team2){selectedTeam2=d.team;}
 		if(selectedTeam==d.team){selectedTeam2=d.team2;}
@@ -185,31 +190,33 @@ d3.json("teams.json", function(data){
 		    .attr("width", 150)
 		    .attr("height", 150);
 
-		chart.append("svg:image")
-		    .attr("x", 430)
-		    .attr("y", 0)
-		    .attr("xlink:href", "bin/pointbanner.png")
-		    .attr("width", 450)
-		    .attr("height", 150);
+		chart.append("circle")
+		    .style("opacity", .5)
+		    .attr("cx", 625)
+		    .attr("cy", -50)
+		    .attr("r", 250)
+		    .attr("fill", "white")
+		    .attr("stroke", "gray")
+		    .attr("stroke-width", 2);
 		
 		
 		chart.append("text")
 		    .attr("x", 560)
-		    .attr("y", 50)
+		    .attr("y", 140)
 		    .text(fullscore)
 		    .attr("font-size", 40)
 		    .attr("fill", function(d) { return selectedColour});
 
 		chart.append("text")
-		    .attr("x", 540)
+		    .attr("x", 550)
 		    .attr("y", 90)
 		    .text(selectedDate)
 		    .attr("font-size", 20)
 		    .attr("fill", function(d) { return selectedColour});
 		
 		chart.append("text")
-		    .attr("x", 500)
-		    .attr("y", 130)
+		    .attr("x", function(d,i){return 500-teemp[i].location.length})
+		    .attr("y", 50)
 		    .text(selectedLocation)
 		    .attr("font-size", 15)
 		    .attr("fill", function(d) { return selectedColour});		
@@ -217,7 +224,8 @@ d3.json("teams.json", function(data){
 	    .on("mouseout", function(){
 		d3.select(this).style("fill", function(d) { return d.colour; })
 		chart.selectAll("image").remove();
-		chart.selectAll("text").remove();	
+		chart.selectAll("text").remove();
+		chart.selectAll("circle").remove();
 	    });
 	//an array of [selected team seasona average, rival teams season average] 
 	//bottom part of the graph
