@@ -76,7 +76,7 @@ function calcAverages(d){
     averages =[temp1/(d.length-(numByes/5)),temp2/(d.length-(numByes/5))]
     for(i=0; i<2; i++){ temp = { "average" : averages[i] };  dataReturn.push(temp)};
    
-    console.log(dataReturn);
+    
     //var dataReturn = { "average1" : averages[0], "average2" : averages[1]};
     //console.log(dataReturn);
     return dataReturn;

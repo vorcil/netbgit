@@ -78,6 +78,7 @@ d3.json("teams.json", function(data){
 	    }
 	    selectedTeam=d.id;
 	    test();
+	    test2();
 	    
 	});
 
@@ -217,36 +218,30 @@ d3.json("teams.json", function(data){
 	    });
 	//an array of [selected team seasona average, rival teams season average] 
 	//bottom part of the graph
-	var colour=d3.scale.category20();
-	Stats=d3.select("svg").append("svg")
-	    .attr("width", 1270)
-	    .attr("height", 200)
-	    .attr("x", 180)
-	    .attr("y", 875);
-
-	var vis = d3.select(Stats).append("svg:svg")
-	    .data(averages)
-	    .attr("width", 250)
-	    .attr("height", 250)
-	    
-	var arc = d3.svg.arc().outerRadius(50);
-
-	var pie = d3.layout.pie()
-	    .value(function(d) { return d.average})
-	    .sort(function(d) { return null; } );
-
-	var arcs=vis.selectAll("g.slice")
-	    .data(pie)
-	    .enter()
-	    .append("svg:g")
-	    .attr("class", "slice");
-
-	arcs.append("svg:path")
-	    .attr("fill", function(d,i){return colour(i);})
-	    .attr("d", arc);
+    }
+    
+    function test2(){
 
 	
-		   
+	var colour=[selectedColour,selectedColour2];
+	
+	pie= svg.append("svg")
+	    .attr("x", 100)
+	    .attr("y", 1000)
+	    .attr("height", 200)
+	    .attr("width", 1400);
+
+
+	
+	pie.selectAll("rect")
+	    .data(averages)
+	    .enter().append("rect")
+	    .style("fill", function(d,i){return colour[i]})
+	    .attr("x", function(d,i){return 100+(100*i);})
+	    .attr("width", function(d) {return d.average})
+	    .attr("y", 0)
+	    .attr("height", function(d) {return d.average});
+	    		   
 	//pie = d3.layout.pie().value(function(d){return d.
     }
 
