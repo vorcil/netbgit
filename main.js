@@ -66,6 +66,7 @@ d3.json("teams.json", function(data){
 		    initBanner=1;
 		} else if(initBanner>0){
 		    banner.selectAll("*").remove();
+		    
 		    var BannerWindow = banner.append("image")
 			.attr("height", 200)
 			.attr("width", 1350)
@@ -74,11 +75,11 @@ d3.json("teams.json", function(data){
 		
 	    }//check if banner or not
 	    if(graphInit=="true"){
-		chart.selectAll('*').remove();
+		chart.selectAll("*").remove();
 	    }
 	    selectedTeam=d.id;
 	    test();
-	    test2();
+	    drawPieAverages();
 	    
 	});
 
@@ -98,7 +99,8 @@ d3.json("teams.json", function(data){
 	teemp=prepScoreData(findTeamData(selectedTeam));
 	averages=calcAverages(teemp);
 	graphInit="true";
-	 chart = d3.select("svg").append("svg")
+	
+	chart = d3.select("svg").append("svg")
 	    .attr("width", 1200)
 	    .attr("height", 500)
 	    .attr("x", 180)
@@ -118,10 +120,10 @@ d3.json("teams.json", function(data){
 	var yAxis = d3.svg.axis().scale(y).orient("left");
 
 	/*var chart = d3.select("body").append("svg")
-	    .attr("width", width+margin.left + margin.right)
-	    .attr("height", height+margin.top + margin.bottom)
-	    .append("g")
-	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");*/
+	  .attr("width", width+margin.left + margin.right)
+	  .attr("height", height+margin.top + margin.bottom)
+	  .append("g")
+	  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");*/
 
 	x.domain(teemp.map(function(d) { return d.round; }));
 	y.domain([0, 100]);
@@ -134,18 +136,19 @@ d3.json("teams.json", function(data){
 	    .style("text-anchor", "end")
 	    .attr("dx", "-.8em")
 	    .attr("dy", "-.55em")
-	    .attr("transform", "rotate(-90)");
+	    .style("fill", selectedColour2)
+	    .attr("transform", "translate(35,25)");
 
 	/*chart.append("g")
-	    .attr("class", "y axis")
-	    .attr("transform", "translate(30, 0)")
-	    .call(yAxis)
-	    .append("text")
-	    .attr("transform", "rotate(-90)")
-	    .attr("y", 0)
-	    .attr("dy", ".71em")
-	    .style("text-anchor", "end")
-	    .text("Points");*/
+	  .attr("class", "y axis")
+	  .attr("transform", "translate(30, 0)")
+	  .call(yAxis)
+	  .append("text")
+	  .attr("transform", "rotate(-90)")
+	  .attr("y", 0)
+	  .attr("dy", ".71em")
+	  .style("text-anchor", "end")
+	  .text("Points");*/
 	
 	chart.selectAll("bar")
 	    .data(teemp)
@@ -167,7 +170,7 @@ d3.json("teams.json", function(data){
 		selectedDate=d.date;
 		selectedLocation=d.location;
 		
-			
+		
 		chart.append("svg:image")
 		    .attr("xlink:href", function(d) { return returnTeamPhoto(chartTeam)})
 		    .attr("x", 0)
@@ -188,7 +191,7 @@ d3.json("teams.json", function(data){
 		    .attr("xlink:href", "bin/pointbanner.png")
 		    .attr("width", 450)
 		    .attr("height", 150);
-		    
+		
 		
 		chart.append("text")
 		    .attr("x", 560)
@@ -220,27 +223,72 @@ d3.json("teams.json", function(data){
 	//bottom part of the graph
     }
     
-    function test2(){
-
+    function drawPieAverages(){
 	
 	var colour=[selectedColour,selectedColour2];
 	
-	pie= svg.append("svg")
-	    .attr("x", 100)
-	    .attr("y", 1000)
-	    .attr("height", 200)
-	    .attr("width", 1400);
+	var vis= svg.append("svg")
+	    .attr("x", 180)
+	    .attr("y", 875)
+	    .attr("width", 1200)
+	    .attr("height", 500)
+	    .append("g")
+	    .attr("transform", "translate(100,100)");
 
+	var arc = d3.svg.arc().outerRadius(80).innerRadius(0);
+	var pie = d3.layout.pie().value(function(d){ console.log("get here"); return d.average;});
+	
+	var g = vis.selectAll(".arc")
+	    .data(pie(averages))
+	    .enter()
+	    .append("g")
+	    .attr("class", "arc");
+
+	g.append("path")
+	    .attr("fill", function(d,i) { return colour[i];})
+	    .attr("d", arc)
+	    .attr("x", 100)
+	    .attr("y", 100);
+
+
+	vis.append("rect")
+	    .attr("x", 125)
+	    .attr("y", 0)
+	    .attr("rx", 10)
+	    .attr("ry", 10)
+	    .attr("width", 50)
+	    .attr("height", 50)
+	    .attr("fill", "white")
+	    .attr("stroke", "gray")
+	    .attr("stroke-width", 2);
+	
+    	vis.append("image")
+	    .attr("xlink:href", function(d) { return returnTeamPhoto(selectedTeam)} )
+	    .attr("x", 100)
+	    .attr("y", -75)
+	    .attr("width", 100)
+	    .attr("height", 100)
+	
+	vis.append("text")
+	    .attr("x", 140)
+	    .attr("y", 38)
+	    .style("fill", selectedColour)
+	    .text(averages[0].average.toPrecision([2]));
+
+	//vis.append("rect")
+	  //  .attr("
 
 	
-	pie.selectAll("rect")
+
+	/*
+	vis.selectAll("rect")
 	    .data(averages)
 	    .enter().append("rect")
 	    .style("fill", function(d,i){return colour[i]})
 	    .attr("x", function(d,i){return 100+(100*i);})
 	    .attr("width", function(d) {return d.average})
 	    .attr("y", 0)
-	    .attr("height", function(d) {return d.average});
+	    .attr("height", function(d) {return d.average});*/
 	    		   
 	//pie = d3.layout.pie().value(function(d){return d.
     }
