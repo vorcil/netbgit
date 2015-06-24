@@ -20,7 +20,7 @@ Rajol Kochlashvili 2015
 
 var numFiles=6;
 var files=[];
-fileName="bin/2010-Table1.csv";
+fileName="bin/2011-Table1.csv";
 for(i=0; i<numFiles; i++){
     files[i]=(2008+i+"-Table1.csv");
 }
@@ -69,8 +69,10 @@ function store(text){
    
     //convert the text to elements in an array
     arrayFile=textFile.split(',');
+
     
     //systematically remove all byes
+    console.log("getting here bye");
     for(i=0; i<arrayFile.length; i++){
 	//if the string contains byes
 	if(arrayFile[i].indexOf("BYES") != -1){
@@ -81,6 +83,7 @@ function store(text){
 	    arrayFile.splice((i-1),1);
 	}
     }
+    
     //this leaves several empty values which need to be removed also
     arrayFile = arrayFile.filter(Boolean);
     finalsData=arrayFile;

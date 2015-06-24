@@ -69,11 +69,11 @@ function calcAverages(d){
     temp1=0, temp2=0;
     //deal with the draw problem across multiple files
     var divis =0;
-    if(fileName!="bin/2011-Table1.csv"){ var divis=1
-					 if (fileName=="bin/2008-Table1.csv" && (selectedTeam=="West Coast Fever" || selectedTeam=="Central Pulse")){
-					     divis=2;
-					 }
-				       };
+    if(fileName !="bin/2011-Table1.csv"){ var divis=1}
+    if (fileName=="bin/2008-Table1.csv" || (selectedTeam=="West Coast Fever" || selectedTeam=="Central Pulse")){
+	divis=2;
+    }
+
     var dataReturn=[];
     for(i=0; i<d.length; i++){
 	if(d[i].score != "w " && d[i].score2 !="dr" && d[i].score != "dr" && d[i].score2 !="w" && d[i].score != "undefined" && d[i].score2 != "undefined"){
