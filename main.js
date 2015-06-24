@@ -8,6 +8,7 @@ d3.json("teams.json", function(data){
      */
     var width = 1400, height=1000, initBanner=0;
     finalClick=1;
+    drawnFinal=0;
     selectedTeam="null";
     selectedTeam2="null";
     chartTeam="null";
@@ -19,7 +20,7 @@ d3.json("teams.json", function(data){
     selectedLocation="null";
     selectedDate="null";
     averages="null";
-    
+   
     // create the main workspace
     var bodySelect = d3.select("body");
      svg = bodySelect.append("svg")
@@ -58,13 +59,15 @@ d3.json("teams.json", function(data){
     var finalsbtn=svg.append("image")
 	.attr("xlink:href", "bin/finals-btn.png")
 	.attr("x", 675)
-	.attr("y", 125)
+	.attr("y", 133)
 	.attr("width", 208)
 	.attr("height", 46)
 	.on("click", function(d){
+	    d3.selectAll("*").transition().style("opacity", 1);
 	    d3.select(this).transition().style("opacity", .7);
+	    chart.selectAll("*").remove();
 	    prepFinalData();
-	   // drawFinal();
+	    drawFinal();
 	});
     
     
@@ -93,7 +96,10 @@ d3.json("teams.json", function(data){
 	    if(d.button="true"){
 		d3.selectAll("*").style("opacity", 1);
 		d3.select(this).transition().style("opacity", .7);
-	    
+		svg.selectAll("text").remove();
+		svg.selectAll("g").remove();
+		
+	
 		
 		clearSelected();
 		d.selected="true"
@@ -121,13 +127,14 @@ d3.json("teams.json", function(data){
 	    if(graphInit=="true"){
 		chart.selectAll("*").remove();
 	    }
-	    selectedTeam=d.id;
-	    test();
-	    drawPieAverages();
+		selectedTeam=d.id;
+		test();
+		drawPieAverages();
+		 
 	    }
 	});
 	
-
+    
     
     var finals = svg.append("svg");
     //initial draw
@@ -173,9 +180,9 @@ d3.json("teams.json", function(data){
 	x.domain(teemp.map(function(d) { return d.round; }));
 	y.domain([0, 100]);
 
-	chart.append("g")
+	svg.append("g")
 	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + 449 + ")")
+	    .attr("transform", "translate(180,825)")
 	    .call(xAxis)
 	    .selectAll("text")
 	    .style("text-anchor", "end")
@@ -246,21 +253,21 @@ d3.json("teams.json", function(data){
 		    .attr("y", 140)
 		    .text(fullscore)
 		    .attr("font-size", 40)
-		    .attr("fill", function(d) { return selectedColour});
+		    .attr("fill", function(d) { return selectedColour2});
 
 		chart.append("text")
 		    .attr("x", 550)
 		    .attr("y", 90)
 		    .text(selectedDate)
 		    .attr("font-size", 20)
-		    .attr("fill", function(d) { return selectedColour});
+		    .attr("fill", function(d) { return selectedColour2});
 		
 		chart.append("text")
 		    .attr("x", function(d,i){return 500-teemp[i].location.length})
 		    .attr("y", 50)
 		    .text(selectedLocation)
 		    .attr("font-size", 15)
-		    .attr("fill", function(d) { return selectedColour});		
+		    .attr("fill", function(d) { return selectedColour2});		
 	    })
 	    .on("mouseout", function(){
 		d3.select(this).style("fill", function(d) { return d.colour; })
@@ -276,7 +283,7 @@ d3.json("teams.json", function(data){
 	
 	var colour=[selectedColour,selectedColour2];
 	
-	var vis= svg.append("svg")
+	 vis= svg.append("svg")
 	    .attr("x", 180)
 	    .attr("y", 875)
 	    .attr("width", 1200)

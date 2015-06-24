@@ -13,7 +13,7 @@
     {"id":"Central Pulse", "x_axis":1040, "y_axis":75,"height":100, "width":100,"image":"bin/team6.png", "selected": "false","banner":"bin/banner6.png","button":"true","colour":"#FEDD01","colour2":"#0796DB"},
     {"id":"Canterbury Tactix", "x_axis":1150, "y_axis":75,"height":100, "width":100,"image":"bin/team7.png", "selected": "false","banner":"bin/banner7.png","button":"true","colour":"#F95627","colour2":"#1F1B1C"},
     {"id":"Waikato Bay of Plenty Magic", "x_axis":1260, "y_axis":75,"height":100, "width":100,"image":"bin/team8.png", "selected": "false","banner":"bin/banner8.png","button":"true","colour":"#493B3B","colour2":"gray"},
-    {"id":"Northern Mystics", "x_axis":1370, "y_axis":75,"height":100, "width":100,"image":"bin/team9.png", "selected": "false","banner":"bin/banner9.png","button":"true","colour":"#3F68F7", "colour2":"white"}
+    {"id":"Northern Mystics", "x_axis":1370, "y_axis":75,"height":100, "width":100,"image":"bin/team9.png", "selected": "false","banner":"bin/banner9.png","button":"true","colour":"#3F68F7", "colour2":"gray"}
    
 
     

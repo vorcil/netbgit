@@ -20,7 +20,7 @@ Rajol Kochlashvili 2015
 
 var numFiles=6;
 var files=[];
-fileName="bin/2008-Table1.csv";
+fileName="bin/2010-Table1.csv";
 for(i=0; i<numFiles; i++){
     files[i]=(2008+i+"-Table1.csv");
 }
