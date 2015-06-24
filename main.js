@@ -22,11 +22,11 @@ d3.json("teams.json", function(data){
     
     // create the main workspace
     var bodySelect = d3.select("body");
-    var svg = bodySelect.append("svg")
+     svg = bodySelect.append("svg")
 	.attr("width", 1500)
 	.attr("height", 1500);
 
-    var banner = svg.append("svg")
+     banner = svg.append("svg")
 	.attr("x", 100)
 	.attr("y", 165)
 	.attr("height", 250)
@@ -49,6 +49,26 @@ d3.json("teams.json", function(data){
 	.attr("y", 365)
 	.attr("height", 500)
 	.attr("width", 1270);
+   var statsbg=svg.append("image")
+	.attr("xlink:href", "bin/info-bg.png")
+	.attr("x", 140)
+	.attr("y", 865)
+	.attr("height", 210)
+	.attr("width", 1270);
+    var finalsbtn=svg.append("image")
+	.attr("xlink:href", "bin/finals-btn.png")
+	.attr("x", 675)
+	.attr("y", 125)
+	.attr("width", 208)
+	.attr("height", 46)
+	.on("click", function(d){
+	    d3.select(this).transition().style("opacity", .7);
+	    prepFinalData();
+	   // drawFinal();
+	});
+    
+    
+    
     
     //Append the images to the application
     var images = svg.selectAll("image")
@@ -84,6 +104,7 @@ d3.json("teams.json", function(data){
 		    var bannerWindow = banner.append("image")
 			.attr("height", 200)
 			.attr("width", 1350)
+			.attr("y", 5)
 			.attr("xlink:href", d.banner);
 		    initBanner=1;
 		} else if(initBanner>0){
@@ -92,6 +113,7 @@ d3.json("teams.json", function(data){
 		    var BannerWindow = banner.append("image")
 			.attr("height", 200)
 			.attr("width", 1350)
+			.attr("y", 5)
 			.attr("xlink:href", d.banner);
 		}
 		

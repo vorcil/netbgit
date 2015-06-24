@@ -60,6 +60,7 @@ function prepScoreData(d){
 	    data.splice(i, 0, temp);
 	}*/
     }
+   
     return data;
 }
 
@@ -138,4 +139,30 @@ function writeText(x,y,text,color,size,visibility,svg){
 	.style("visibility", visibility)
     //.style("font-weight", "bold")
 	.attr("fill", color);
+}
+
+/*Attemp to filter out rounds of finals data*/
+function prepFinalData(){
+
+    var tempFinalData=finalsData;
+    tempFinalData=tempFinalData.splice(tempFinalData.indexOf("15"),tempFinalData.length);
+
+    chart.selectAll("*").remove();
+    banner.selectAll("*").remove();
+    svg.selectAll("*").style("opacity", 1);
+   
+    var finalBanner = banner.append("image")
+	.attr("xlink:href", "bin/finals-banner.png")
+	.attr("x", 25)
+	.attr("y", 0)
+	.attr("width", 1308)
+	.attr("height", 202);
+    
+  //  console.log("finaldatahere")
+    //tempFinalData=tempFinalData+"test";
+    //console.log("tempfinal2")
+    //alert(tempFinalData);
+
+    
+    
 }

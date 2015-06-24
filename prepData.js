@@ -83,6 +83,7 @@ function store(text){
     }
     //this leaves several empty values which need to be removed also
     arrayFile = arrayFile.filter(Boolean);
+    finalsData=arrayFile;
 }
    
 //alert(textFile);
