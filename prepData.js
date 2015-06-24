@@ -3,6 +3,10 @@
 **IMPORTANT** 
 The prepData script will find all CSV files within the local repository (inside netbgit/bin/) and concatenate each file to a master JSON file.
 
+*IMPORTANT*
+Google-Chrome does not allow local JSON files to be called (not easily). Local testing of the project must be done in a JSON friendly file; 
+Testing has shown that the project app does work in Google-Chrome when using a server.
+
 **WARNING**
 The initial program ASSUMES that there are only 6 CSV files covering the years from 2008 to 2013, any later ADDITIONS require the user to change the variable numFiles from 6 to 6+n where n is an integer and the number of sequential years/CSV files you are adding, so for example including 2014 to the data set will require you to manually set numFiles=7
 
@@ -23,7 +27,7 @@ Each Consecutive Line: R,"DATE, TIME",TEAM1,N1-N2,TEAM2,LOCATION
 Date and time must be encapsulated within quotation marks, if there is no time available and only "DATE", a manual addition of "0", After ""DATE"," is required.
 TEAM1 & TEAM2 Must not be in Quotes and be of the standard naming of the team, e.g. Central Pulse. Not central Pulse, or Central-Pulse ect.
 N1-N2 deontes the scores for the game, where N1 is attributed to team1 and must be double digits, N2 is attributed to team2 and double digits, no other additions are allowed such as N1-N2 (N3 N4) as in the 2010-Table2.CSV where random scores had seconday points attached. If there are extra stats, those must be excluded from the data and N1-N2 naming convention adopted. 
-"LOCATION" or LOCATION is accepted, however NO commas "," are allowed within the LOCATION.
+"LOCATION" or LOCATION is accepted, however NO commas "," are allowed within the LOCATION. 
 
 All other differences from standardized CSV convention have been taken into account for and code in place for automatic processing. Such as placing new lines (which aren't allowed in CSV files) for example.
 
@@ -34,9 +38,11 @@ All other differences from standardized CSV convention have been taken into acco
 
 */
 
+
 var numFiles=6;
 var files=[];
-fileName="bin/2013-Table1.csv";
+fileName=name;
+
 for(i=0; i<numFiles; i++){
     files[i]=(2008+i+"-Table1.csv");
 }
@@ -55,10 +61,9 @@ store(fileName);
 
 
 
-
 //can put an argument in store
 function store(text){
-   numByes=0;
+    numByes=0;
     
     var csvFile= new XMLHttpRequest();
     csvFile.open("GET", text, false);
@@ -76,13 +81,13 @@ function store(text){
     /*fix the first line problem
       1: find position of venue
       2: only include in the file everything after venue
-     */
+    */
     var n = textFile.search("Venue");
     textFile=textFile.slice(n+6,textFile.length+n+6);
     
     //replace all new lines with commas (because the CSV file is not actually a real CSV file
     textFile=textFile.replace(/\n/g, ",");
-   
+    
     //convert the text to elements in an array
     arrayFile=textFile.split(',');
 
@@ -103,51 +108,51 @@ function store(text){
     arrayFile = arrayFile.filter(Boolean);
     finalsData=arrayFile;
 }
-   
+
 //alert(textFile);
 //console.log(arrayJson);
 //alert(arrayFile);
 
 /*want to split into 10 arrays 
-1:"Melbourne Vixens"
-2:"New South Wales Swifts"
-3:"Queensland Firebirds"
-4:"West Coast Fever"
-5:"Adelaide Thunderbirds"
-6:"Southern Steel"
-7:"Central Pulse"
-8:"Canterbury Tactix"
-9:"Waikato Bay of Plenty Magic"
-10:"Northern Mystics"
+  1:"Melbourne Vixens"
+  2:"New South Wales Swifts"
+  3:"Queensland Firebirds"
+  4:"West Coast Fever"
+  5:"Adelaide Thunderbirds"
+  6:"Southern Steel"
+  7:"Central Pulse"
+  8:"Canterbury Tactix"
+  9:"Waikato Bay of Plenty Magic"
+  10:"Northern Mystics"
 
-parse through the entire json - or maybe the array?
-extract three pieces of information per and push into the array
-want 
+  parse through the entire json - or maybe the array?
+  extract three pieces of information per and push into the array
+  want 
 */
 /*function returnTeamImage(team){
-    
-    if(team=="Melbourne Vixens"){
-	return "bin/team0.png";}
-    if(team=="West Coast Fever"){
-	return "bin/team1.png";}
-    if(team=="Adelaide Thunderbirds"){
-	return "bin/team2.png";}
-    if(team=="Queensland Firebirds"){
-	return "bin/team3.png";}
-    if(team=="New South Wales Swifts"){
-	return "bin/team4.png";}
-    if(team=="Southern Steel"){
-	return "bin/team5.png";}
-    if(team=="Central Pulse"){
-	return "bin/team6.png";}
-    if(team=="Canterbury Tactix"){
-	return "bin/team7.png";}
-    if(team=="Waikato Bay of Plenty Magic"){
-	return "bin/team8.png";}
-    if(team=="Northern Mystics"){
-	return "bin/team9.png";}
- 
-}
+  
+  if(team=="Melbourne Vixens"){
+  return "bin/team0.png";}
+  if(team=="West Coast Fever"){
+  return "bin/team1.png";}
+  if(team=="Adelaide Thunderbirds"){
+  return "bin/team2.png";}
+  if(team=="Queensland Firebirds"){
+  return "bin/team3.png";}
+  if(team=="New South Wales Swifts"){
+  return "bin/team4.png";}
+  if(team=="Southern Steel"){
+  return "bin/team5.png";}
+  if(team=="Central Pulse"){
+  return "bin/team6.png";}
+  if(team=="Canterbury Tactix"){
+  return "bin/team7.png";}
+  if(team=="Waikato Bay of Plenty Magic"){
+  return "bin/team8.png";}
+  if(team=="Northern Mystics"){
+  return "bin/team9.png";}
+  
+  }
 */
 //create a json of a single team's games, all their games.
 function findTeamData(teamName){
@@ -174,16 +179,16 @@ function findTeamData(teamName){
 		"score" : arrayFile[i+1],
 		"team2" : arrayFile[i+2],
 		"location" : arrayFile[i+3]
-	    
+		
 	    };
 	    tempArray.push(toPush);	
 	}
-	  
+	
     }
     return tempArray;
     
 }
-    
+
 function jsonify(){
     for(i=0; i<arrayFile.length; i=i+7){
 	var toPush = {
@@ -199,4 +204,5 @@ function jsonify(){
     }
     myJson = JSON.stringify({arrayJson: arrayJson});
 }
+
 
