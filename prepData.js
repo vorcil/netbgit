@@ -15,12 +15,28 @@ manually checked. I could have written some code to deal with this (as I did for
 
 **WARNING**
 Furthermore a manual addition is required to the heading field of each CSV file to the value "venue" and must become "venue," that is to add a comma to the end
-Rajol Kochlashvili 2015
+
+***WARNING!***
+The standard output of each CSV file:
+First Line: Round,Date,Home Team,Score,Away Team,Venue
+Each Consecutive Line: R,"DATE, TIME",TEAM1,N1-N2,TEAM2,LOCATION
+Date and time must be encapsulated within quotation marks, if there is no time available and only "DATE", a manual addition of "0", After ""DATE"," is required.
+TEAM1 & TEAM2 Must not be in Quotes and be of the standard naming of the team, e.g. Central Pulse. Not central Pulse, or Central-Pulse ect.
+N1-N2 deontes the scores for the game, where N1 is attributed to team1 and must be double digits, N2 is attributed to team2 and double digits, no other additions are allowed such as N1-N2 (N3 N4) as in the 2010-Table2.CSV where random scores had seconday points attached. If there are extra stats, those must be excluded from the data and N1-N2 naming convention adopted. 
+"LOCATION" or LOCATION is accepted, however NO commas "," are allowed within the LOCATION.
+
+All other differences from standardized CSV convention have been taken into account for and code in place for automatic processing. Such as placing new lines (which aren't allowed in CSV files) for example.
+
+
+
+(c) Rajol Kochlashvili 2015 - prepData.js, graph.js, main.js
+
+
 */
 
 var numFiles=6;
 var files=[];
-fileName="bin/2011-Table1.csv";
+fileName="bin/2013-Table1.csv";
 for(i=0; i<numFiles; i++){
     files[i]=(2008+i+"-Table1.csv");
 }
@@ -72,7 +88,6 @@ function store(text){
 
     
     //systematically remove all byes
-    console.log("getting here bye");
     for(i=0; i<arrayFile.length; i++){
 	//if the string contains byes
 	if(arrayFile[i].indexOf("BYES") != -1){

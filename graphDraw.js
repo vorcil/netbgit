@@ -37,8 +37,11 @@ function prepScoreData(d){
 		    
 		};
 		data.push(toPush);
+		
 	    }
     }
+    console.log(data);
+    console.log("getting to this point");
     //fill in the missing rounds with 0 values (point 1 scores)
     for(i=0; i<13; i++){
 	
@@ -51,27 +54,27 @@ function prepScoreData(d){
 	    
 	    data.splice(i, 0, temp);
 	}
-	/*if(data[i].score == "w " || data[i].score=="dr"){
-	    var temp={
-		"round" : "DRAW",
-		"score" : 1
-	    };
-	    
-	    data.splice(i, 0, temp);
-	}*/
     }
-   
+	/*if(data[i].score == "w " || data[i].score=="dr"){
+	  var temp={
+	  "round" : "DRAW",
+	  "score" : 1
+	  };
+	  
+	  data.splice(i, 0, temp);
+	  }*/
+    
+    console.log("returning the data");
     return data;
+    
 }
 
 //calculate the averages across the selected team's scores
 function calcAverages(d){
     temp1=0, temp2=0;
     //deal with the draw problem across multiple files
-    var divis =0;
-    if(fileName !="bin/2011-Table1.csv"){ var divis=1}
-    if (fileName=="bin/2008-Table1.csv" || (selectedTeam=="West Coast Fever" || selectedTeam=="Central Pulse")){
-	divis=2;
+    divis=1;
+    if (fileName=="bin/2008-Table1.csv" && (selectedTeam=="West Coast Fever" || selectedTeam=="Central Pulse")){ divis=2;
     }
 
     var dataReturn=[];
@@ -81,6 +84,7 @@ function calcAverages(d){
 	    temp2=temp2+parseInt(d[i].score2);
 	}
     }
+    console.log("temp1: " +temp1)
     averages =[temp1/(d.length-divis),temp2/(d.length-divis)]
     for(i=0; i<2; i++){ temp = { "average" : averages[i] };  dataReturn.push(temp)};
    
@@ -89,10 +93,6 @@ function calcAverages(d){
     //console.log(dataReturn);
     return dataReturn;
 }
-
-
-
-
 
 
 //A function to return the location of a teamphoto by teamname
