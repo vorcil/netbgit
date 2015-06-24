@@ -157,12 +157,40 @@ function prepFinalData(){
 	.attr("y", 0)
 	.attr("width", 1308)
 	.attr("height", 202);
-    
-  //  console.log("finaldatahere")
-    //tempFinalData=tempFinalData+"test";
-    //console.log("tempfinal2")
-    //alert(tempFinalData);
 
+    tempSemi1=tempFinalData.splice(0,tempFinalData.indexOf("16"));
+    tempSemi2=tempFinalData.splice(0,tempFinalData.indexOf("17"));
+    tempSemi3=tempFinalData.splice(0,tempFinalData.length);
     
+    semi1=[];
+    var toPush={
+	"round" : tempSemi1[0],
+	"date" : tempSemi1[1],
+	"time" : tempSemi1[2],
+	"team1" : tempSemi1[3],
+	"fullscore" : tempSemi1[4],
+	"team2" : tempSemi1[5],
+	"location" : tempSemi1[6],
+	"score" : tempSemi1[4].substring(0,2),
+	"score2" : tempSemi1[4].substring(3,5)
+    };
+    var toPush2={
+	"round" : tempSemi1[7],
+	"date" : tempSemi1[8],
+	"time" : tempSemi1[9],
+	"team1" : tempSemi1[10],
+	"fullscore" : tempSemi1[11],
+	"team2" : tempSemi1[12],
+	"location" : tempSemi1[13],
+	"score" : tempSemi1[11].substring(0,2),
+	"score2" : tempSemi1[11].substring(3,5)
+    }
     
+	semi1.push(toPush);
+	semi1.push(toPush2);
 }
+
+
+
+
+
