@@ -38,6 +38,14 @@ function all(){
 	    .attr("y", 165)
 	    .attr("height", 250)
 	    .attr("width", 1400);
+	
+	var info = banner.append("image")
+	    .attr("x", 250)
+	    .attr("y", -75)
+	    .attr("height", 400)
+	    .attr("width", 850)
+	    .attr("xlink:href", "bin/prompt.png");
+	
 	var ausbg = svg.append("image")
 	    .attr("xlink:href", "bin/au-bg.png")
 	    .attr("x", 75)
@@ -138,7 +146,7 @@ function all(){
 		    selectedTeam=d.id;
 		    test();
 		    drawPieAverages();
-		   
+		    
 		}
 	    });
 	
@@ -150,8 +158,6 @@ function all(){
 	}
 	//initial draw
 	//finalsButton();
-
-
 
 
 
@@ -344,6 +350,12 @@ function all(){
 		.attr("y", -75)
 		.attr("width", 100)
 		.attr("height", 100)
+	    vis.append("image")
+		.attr("xlink:href", function(d) { return returnTeamPhoto2(selectedTeam)})
+		.attr("x", 205)
+		.attr("y", -100)
+		.attr("height", 190)
+		.attr("width", 675);
 	    
 	    vis.append("text")
 		.attr("x", 140)

@@ -164,6 +164,30 @@ function restart(path){
 	    return "bin/team9.png"}
     }
 
+ //A function to return the location of the vis banners by teamname
+    function returnTeamPhoto2(name){
+	if(name=="Melbourne Vixens"){
+	    return "bin/teambanner/team0.png" }
+	if(name=="West Coast Fever"){
+	    return "bin/teambanner/team1.png" }
+	if(name=="Adelaide Thunderbirds"){
+	    return "bin/teambanner/team2.png" }
+	if(name=="Queensland Firebirds"){
+	    return "bin/teambanner/team3.png" }
+	if(name=="New South Wales Swifts"){
+	    return "bin/teambanner/team4.png" }
+	if(name=="Southern Steel"){
+	    return "bin/teambanner/team5.png" }
+	if(name=="Central Pulse"){
+	    return "bin/teambanner/team6.png"}
+	if(name=="Canterbury Tactix"){
+	    return "bin/teambanner/team7.png"}
+	if(name=="Waikato Bay of Plenty Magic"){
+	    return "bin/teambanner/team8.png"}
+	if(name=="Northern Mystics"){
+	    return "bin/teambanner/team9.png"}
+    }
+
 
 
 
