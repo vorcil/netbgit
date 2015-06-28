@@ -319,31 +319,37 @@ function drawFinal(){
 
     drawPoints(360,80,180,semi1[0]);drawPoints(360,305,405,semi1[1]);
     drawPoints(760,180,305,semi2[0]);drawPoints(1160,180,305,semi3[0]);
+
     
+}
+
+
+function drawRect(x,y){
+    chart.append("rect")
+	.attr("x", x).attr("y", y).attr("width", 300).attr("height",50)
+	.attr("rx", 10).attr("ry", 10).attr("fill", "white")
+	.attr("stroke", "gray").attr("stroke-width", 2)
+	.on("mouseover", function(d) {d3.select(this).attr("opacity",.8);
+				      d3.select(this).attr("fill", selectedColour2)})
+	.on("mouseout", function(d) {d3.select(this).attr("opacity",1);
+				     d3.select(this).attr("fill","white")});
     
-    }
+}
 
+function drawText(x,y,name){
+    chart.append("text")
+	.attr("x", x).attr("y",y).text(name)
+	.attr("font-size", "15px").style("font-weight", "bold");
+}
 
-    function drawRect(x,y){
-	chart.append("rect")
-	    .attr("x", x).attr("y", y).attr("width", 300).attr("height",50)
-	    .attr("rx", 10).attr("ry", 10).attr("fill", "white")
-	    .attr("stroke", "gray").attr("stroke-width", 2);
-    }
-
-    function drawText(x,y,name){
-	chart.append("text")
-	    .attr("x", x).attr("y",y).text(name)
-	    .attr("font-size", "15px").style("font-weight", "bold");
-    }
-
-    function drawLine(x1,y1,x2,y2){
-	chart.append("line")
-	    .style("stroke", "black").style("stroke-width", 3)
-	    .attr("x1", x1).attr("x2",x2)
-	    .attr("y1", y1).attr("y2",y2);
-    }
+function drawLine(x1,y1,x2,y2){
+    chart.append("line")
+	.style("stroke", "black").style("stroke-width", 3)
+	.attr("x1", x1).attr("x2",x2)
+	.attr("y1", y1).attr("y2",y2);
+}
 function drawPoints(x,y,y2,semi){
+   
     chart.append("text")
 	.attr("x", x).attr("y", y).text(semi.score)
 	.attr("fill", function(d) {
@@ -361,7 +367,7 @@ function drawPoints(x,y,y2,semi){
 	    if(semi.score2<semi.score){
 		return "red" }
 	});
-		
+    
 
 }
 

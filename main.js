@@ -202,7 +202,7 @@ function all(){
 		.style("fill", selectedColour2)
 		.attr("transform", "translate(35,25)");
 
-	    /*chart.append("g")
+	    chart.append("g")
 	      .attr("class", "y axis")
 	      .attr("transform", "translate(30, 0)")
 	      .call(yAxis)
@@ -211,7 +211,7 @@ function all(){
 	      .attr("y", 0)
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
-	      .text("Points");*/
+	      .text("Points");
 	    
 	    chart.selectAll("bar")
 		.data(teemp)
@@ -357,7 +357,13 @@ function all(){
 		.style("fill", selectedColour)
 		.text("AVERAGE POINTS PER GAME");
 
-	   
+	    vis.append("rect")
+		.attr("x",940).attr("y", -97).attr("rx",10).attr("ry",10).attr("width",100)
+		.attr("height",25).attr("fill","white").attr("stroke","gray").attr("stroke-width",2);
+
+	    vis.append("text").attr("x",946).attr("y",-80).style("fill",selectedColour2)
+		.text("Select Year");
+	    
 
 
 	    drawYears();
